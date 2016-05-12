@@ -14,7 +14,7 @@ def companies(request):
     return render(request, 'companies.html', {})
 
 
-def company(request, id=None):
+def company(request, slug=None):
     company = get_object_or_404(Company, pk=id)
     return render(
         request,
@@ -23,8 +23,8 @@ def company(request, id=None):
     )
 
 
-def product(request, id=None):
-    product = get_object_or_404(Product, pk=id)
+def product(request, slug=None):
+    product = get_object_or_404(Product, slug=slug)
     return render(
         request,
         'product.html',

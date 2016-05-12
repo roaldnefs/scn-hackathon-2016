@@ -10,6 +10,8 @@ class CompanyAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
+    readonly_fields = ['created', 'modified', 'slug']
+
     class Meta:
         model = models.Product
         exclude = []
