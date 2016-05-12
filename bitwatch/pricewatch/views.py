@@ -1,5 +1,7 @@
 from django.shortcuts import HttpResponse, render, get_object_or_404
 from models import Product, Company
+from django.core import serializers
+from django.utils.safestring import SafeString
 
 
 def index(request):
@@ -7,7 +9,11 @@ def index(request):
 
 
 def pricewatch(request):
-    return render(request, 'pricewatch.html', {})
+    products_json = serializers.serialize('json', Product.objects.all())
+    return render(
+        request,
+        'pricewatch.html',
+        {'products_json': SafeString(products_json)})
 
 
 def companies(request):
