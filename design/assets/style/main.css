@@ -30,7 +30,7 @@ a.btn-white:visited {
 
 
 /* * * * * * * * * *
- * Header gedeelte 
+ * Header gedeelte
  * * * * * * * * * */
 .fluid-container.header {
 	height: 250px;
@@ -110,17 +110,17 @@ a.btn-white:visited {
 
 
 /* * * * * * * * * *
- * Main gedeelte 
+ * Main gedeelte
  * * * * * * * * * */
 .main_container {
 	margin-top: 25px;
 }
-	
+
 .main_container .filter_menu {
 	padding-left: 0px;
 	padding-right: 0px;
 }
-		
+
 .main_container .filter_menu .box {
 	border-bottom: 1px solid rgb(235,235,235);
 	margin-bottom: 5px;
@@ -130,7 +130,7 @@ a.btn-white:visited {
 	border-bottom: none;
 	margin-bottom: 0px;
 }
-			
+
 .main_container .filter_menu .box .header {
 	padding: 10px 0px 7px 10px;
 	cursor: pointer;
@@ -206,7 +206,7 @@ a.btn-white:visited {
 
 
 /* * * * * * * * * *
- * Footer gedeelte 
+ * Footer gedeelte
  * * * * * * * * * */
 .footer {
 	position: relative;
@@ -214,7 +214,7 @@ a.btn-white:visited {
 	height: 100px;
 	clear: both;
 	padding-top: 20px;
-} 
+}
 
 
 
@@ -226,16 +226,16 @@ a.btn-white:visited {
 	.fluid-container.header {
 		height: 100px;
 	}
-	
+
 	.mobile_button .logo {
 		margin-top: -6px;
 		margin-left: 25px;
 	}
-	
+
     .header .desktop_menu {
 		display: none;
     }
-	
+
 	.header .mobile_button {
 		display: block;
 		margin-top: 31px;
