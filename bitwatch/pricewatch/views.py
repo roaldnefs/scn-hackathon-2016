@@ -1,4 +1,5 @@
-from django.shortcuts import HttpResponse, render
+from django.shortcuts import HttpResponse, render, get_object_or_404
+from models import Product, Company
 
 
 def index(request):
@@ -14,11 +15,20 @@ def companies(request):
 
 
 def company(request, id=None):
-    return render(request, 'company.html', {})
+    company = get_object_or_404(Company, pk=id)
+    return render(
+        request,
+        'company.html',
+        {'company': company}
+    )
 
 
 def product(request, id=None):
-    return render(request, 'product.html', {})
+    product = get_object_or_404(Product, pk=id)
+    return render(
+        request,
+        'product.html',
+        {'product': product})
 
 
 def about(request):
