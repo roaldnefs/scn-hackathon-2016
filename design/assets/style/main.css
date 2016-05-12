@@ -1,0 +1,248 @@
+html, body {
+	height: 100%;
+}
+
+body {
+	background-color: rgb(240,240,240);
+}
+
+.website_wrapper {
+	min-height: 100%;
+	padding-bottom: 100px;
+	overflow: auto;
+}
+
+.btn-white {
+	border: 1px solid white;
+}
+
+.btn-white:hover {
+	background-color: rgb(65,65,65);
+}
+
+a.btn-white {
+	color: white;
+}
+
+a.btn-white:visited {
+	color: white;
+}
+
+
+/* * * * * * * * * *
+ * Header gedeelte 
+ * * * * * * * * * */
+.fluid-container.header {
+	height: 250px;
+	background-color: rgb(50,50,50);
+	box-shadow: 0px 2px 5px rgb(125,125,125);
+	color: white;
+}
+
+
+.header .logo .fa-circle {
+	line-height: 50px;
+}
+
+.header .logo .fa-btc {
+	color: rgb(50,50,50);
+	line-height: 50px;
+}
+
+.header .logo .text {
+	font-size: 22px;
+	margin-left: 5px;
+	margin-top: 10px;
+}
+
+.header .menu {
+	margin-top: 10px;
+}
+
+.header .menu ul li {
+	display: inline-block;
+	vertical-align: middel;
+	margin-left: 20px;
+	font-size: 16px;
+}
+
+.header .menu ul li a {
+	color: white;
+}
+
+.header .menu ul li:first-of-type {
+	margin-left: 0px;
+}
+
+.header .slogan {
+	font-size: 25px;
+	margin-top: 65px;
+	text-align: center;
+}
+
+.header .mobile_button {
+	display: none;
+}
+
+.mobile_menu {
+	display: none;
+	background-color: black;
+}
+
+.mobile_menu ul {
+	list-style-type: none;
+}
+
+.mobile_menu ul li {
+	margin-left: -40px;
+	padding: 4px 5px;
+}
+
+.mobile_menu ul li a {
+	color: white;
+}
+
+.mobile_menu ul li:first-of-type {
+	padding-top: 12px;
+}
+
+
+
+
+/* * * * * * * * * *
+ * Main gedeelte 
+ * * * * * * * * * */
+.main_container {
+	margin-top: 25px;
+}
+	
+.main_container .filter_menu {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+		
+.main_container .filter_menu .box {
+	border-bottom: 1px solid rgb(235,235,235);
+	margin-bottom: 5px;
+}
+
+.main_container .filter_menu .box:last-of-type {
+	border-bottom: none;
+	margin-bottom: 0px;
+}
+			
+.main_container .filter_menu .box .header {
+	padding: 10px 0px 7px 10px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.main_container .filter_menu .box .content {
+	padding: 10px 20px;
+	padding-top: 7px;
+}
+
+.main_container .filter_menu .box .content #prijs-slider {
+	margin-bottom: 10px;
+}
+
+.main_container .content_box {
+	background-color: white;
+	box-shadow: 2px 2px 5px rgb(200,200,200);
+}
+
+.main_container .product_list .content_box {
+	margin-bottom: 10px;
+	height: 100px;
+	padding-right: 0px;
+}
+
+.main_container .product_list .content_box .thumb {
+	height: 100%;
+	width: 100px;
+	background-image: url('../image/thumb_test.jpeg');
+	background-size: 100% 100%;
+}
+
+.main_container .product_list .content_box .content {
+	padding-top: 5px;
+	position: absolute;
+	left: 130px;
+	right: 150px;
+}
+
+.main_container .product_list .content_box .content .title {
+	font-size: 20px;
+}
+
+.main_container .product_list .content_box .content .cat {
+	margin-left: 10px;
+	color: gray;
+}
+
+.main_container .product_list .content_box .content .desc {
+	margin-top: 4px;
+	font-size: 13px;
+}
+
+.main_container .product_list .content_box .price {
+	border-left: 1px solid rgb(235,235,235);
+	height: 100%;
+	width: 150px;
+	text-align: right;
+	padding: 16px 20px 0px 0px;
+	line-height: 16px;
+}
+
+.main_container .product_list .content_box .price .btc {
+	font-size: 18px;
+}
+
+.main_container .product_list .content_box .price .eur {
+	color: gray;
+}
+
+
+
+
+/* * * * * * * * * *
+ * Footer gedeelte 
+ * * * * * * * * * */
+.footer {
+	position: relative;
+	margin-top: -100px; /* negative value of footer height */
+	height: 100px;
+	clear: both;
+	padding-top: 20px;
+} 
+
+
+
+
+
+
+
+@media only screen and (max-width: 767px) {
+	.fluid-container.header {
+		height: 100px;
+	}
+	
+	.mobile_button .logo {
+		margin-top: -6px;
+		margin-left: 25px;
+	}
+	
+    .header .desktop_menu {
+		display: none;
+    }
+	
+	.header .mobile_button {
+		display: block;
+		margin-top: 31px;
+		margin-right: 25px;
+	}
+}
+
+
+
+
