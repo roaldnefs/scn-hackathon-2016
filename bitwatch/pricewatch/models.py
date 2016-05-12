@@ -35,7 +35,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=17, decimal_places=8)
     slug = models.SlugField(max_length=255, unique=True, editable=False)
     url = models.URLField(blank=True)
-    views = models.IntegerField(default=0)
+    views = models.IntegerField(default=0, editable=False)
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)

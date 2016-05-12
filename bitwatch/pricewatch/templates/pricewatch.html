@@ -24,11 +24,19 @@
             </div>
             <div class="box">
                 <div class="header"><i class="fa fa-caret-down" aria-hidden="true"></i> Categorie</div>
-                <div class="content">Content</div>
+                <div class="content">
+                    {% for category in categories %}
+                        {{ category.name }} - {{ category.id }}
+                    {% endfor %}
+                </div>
             </div>
             <div class="box">
                 <div class="header"><i class="fa fa-caret-down" aria-hidden="true"></i> Bedrijf</div>
-                <div class="content">Content</div>
+                <div class="content">
+                    {% for company in companies %}
+                        {{ company.name }} - {{ company.id }}
+                    {% endfor %}
+                </div>
             </div>
 
         </div>

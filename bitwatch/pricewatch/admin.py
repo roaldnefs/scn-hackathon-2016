@@ -10,7 +10,7 @@ class CompanyAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    readonly_fields = ['created', 'modified', 'slug']
+    readonly_fields = ['views', 'created', 'modified', 'slug']
 
     class Meta:
         model = models.Product
