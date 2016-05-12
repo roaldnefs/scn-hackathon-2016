@@ -20,6 +20,7 @@ class Company(models.Model):
     name = models.CharField(max_length=128)
     kvk = models.IntegerField()
     description = models.TextField(blank=True)
+    url = models.URLField(blank=True)
 
     class Meta:
         verbose_name = 'bedrijf'
@@ -34,7 +35,7 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=17, decimal_places=8)
     slug = models.SlugField(max_length=255, unique=True, editable=False)
-    url = models.URLField(blank=True)
+    url = models.URLField()
     views = models.IntegerField(default=0, editable=False)
 
     created = models.DateTimeField(auto_now_add=True)

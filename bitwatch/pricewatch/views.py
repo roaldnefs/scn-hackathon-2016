@@ -2,6 +2,7 @@ from django.shortcuts import HttpResponse, render, get_object_or_404
 from models import Product, Company, Category
 from django.core import serializers
 from django.utils.safestring import SafeString
+from django.db.models import F
 
 
 def index(request):
@@ -33,6 +34,8 @@ def company(request, slug=None):
 
 def product(request, slug=None):
     product = get_object_or_404(Product, slug=slug)
+    # Do a transaction to increment the views.
+    Product.objects.filter(pk=product.id).update(views=F('views') + 1)
     return render(
         request,
         'product.html',

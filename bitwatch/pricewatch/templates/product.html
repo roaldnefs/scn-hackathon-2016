@@ -4,8 +4,32 @@
 {% block title %}Product{% endblock %}
 
 {% block content %}
-<h1>Product</h1>
-<p>{{ product.name }}</p>
-<p>{{ product.created }}</p>
-<p>{{ product.modified }}</p>
+
+<div class="container main_container">
+    <div class="row">
+        <div class="col-xs-12 box">
+            <div class="col-md-4"><img src="{% static 'images/thumbnail.jpeg' %}" alt="{{ product.name }}" style="width:100%;"></div>
+            <div class="col-md-8">
+                <h2>{{ product.name }}</h2>
+                <ul class="list-inline">
+                    <li data-toggle="tooltip" data-placement="bottom" title="Categorie: {{ product.category.name }}"><i class="fa fa-tag"></i> {{ product.category.name }} </li>
+                    <li data-toggle="tooltip" data-placement="bottom" title="Bedrijf: {{ product.company.name }}">
+                        {% if product.company.url %}
+                            <a href="{{ product.company.url }}">
+                        {% endif %}
+                        <i class="fa fa-building"></i>&nbsp;{{ product.company.name }}
+                        {% if product.company.url %}
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li data-toggle="tooltip" data-placement="bottom" title="Aantal keer bekeken: {{ product.views }}"><i class="fa fa-eye"></i> {{ product.views }}</li>
+                    <li data-toggle="tooltip" data-placement="bottom" title="Aangepast op: {{ product.modified }}"><i class="fa fa-clock-o"></i> {{ product.modified }}</li>
+                </ul>
+                <p>{{ product.description }}</p>
+                <p><a class="btn btn-success" href="{{ product.url }}" role="button">Bekijk <i class="fa fa-arrow-right"></i></a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

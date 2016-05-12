@@ -86,8 +86,8 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <ul>
-                    <li>&copy; 2016 - <a href="{% url 'index' %}">BitWatch</a></li>
+                <ul class="list-inline">
+                    <li>&copy; 2016 - <a href="{% url 'index' %}">BITWATCH</a></li>
                     <li><a href="{% url 'about' %}">OVER</a></li>
                     <li><a href="#">LOGIN</a></li>
                 </ul>
@@ -100,5 +100,10 @@
 <script src="{% static 'js/jquery-ui.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/product.js' %}"></script>
+<script type="text/javascript">
+    $(function () {
+       $('[data-toggle="tooltip"]').tooltip()
+    });
+</script>
 </body>
 </html>
