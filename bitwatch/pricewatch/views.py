@@ -1,5 +1,6 @@
 from django.shortcuts import HttpResponse, render, get_object_or_404
 from models import Product, Company, Category
+from forms import CompanyForm, ProductForm
 from django.core import serializers
 from django.utils.safestring import SafeString
 from django.db.models import F
@@ -88,3 +89,31 @@ def profile(request):
             password_error_state = 'Nieuwe wachtwoord komt niet overeen met de wachtwoord check!'
 
     return render(request, 'profile.html', {'password_error_state': password_error_state, 'password_success_state': password_success_state})
+
+
+@login_required(login_url='login')
+def my_companies(request):
+    user = request.user
+    if request.method == 'POST':
+        form = CompanyForm(request.POST)
+        if form.is_valid():
+            company = form.save(commit=False)
+            company.owner = user
+            form.save()
+    else:
+        form = CompanyForm()
+    companies = Company.objects.filter(owner=user)
+    return render(request, 'my_companies.html', {'companies': companies, 'form': form})
+
+
+def my_products(request):
+    user = request.user
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = ProductForm()
+    companies = Company.objects.filter(owner=user)
+    products = Product.objects.filter(company__in=companies)
+    return render(request, 'my_products.html', {'products': products, 'form': form})

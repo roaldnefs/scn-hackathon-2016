@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.db import models
 
@@ -21,6 +22,8 @@ class Company(models.Model):
     kvk = models.IntegerField()
     description = models.TextField(blank=True)
     url = models.URLField(blank=True)
+
+    owner = models.ForeignKey(User, blank=True, null=True)
 
     class Meta:
         verbose_name = 'bedrijf'

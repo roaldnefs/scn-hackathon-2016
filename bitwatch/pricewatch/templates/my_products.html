@@ -1,0 +1,27 @@
+{% extends "dashboard_base.html" %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block title %}Mijn Producten{% endblock %}
+
+{% block dashboard %}
+
+<h2>Mijn Producten</h2>
+
+{% for product in products %}
+    {{ product.name }}
+{% endfor %}
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">Nieuw product toevoegen</div>
+    <div class="panel-body">
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+                <button type="submit" class="btn btn-default">Toevoegen</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
