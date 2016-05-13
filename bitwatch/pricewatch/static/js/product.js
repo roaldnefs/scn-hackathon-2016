@@ -433,11 +433,15 @@ $(document).ready (function ()
 
 
 	/* Parse de producten (JSON formaat) naar een object. */
-	product_data = jQuery.parseJSON (product_json);
+	product_data = ((typeof (product_json) !== 'undefined') ? jQuery.parseJSON (product_json) : '');
 	
 	/* Parse de speciale producten. */
-	product_special = jQuery.parseJSON (advertisements_json);
+	product_special = ((typeof (advertisements_json) !== 'undefined') ? jQuery.parseJSON (advertisements_json) : '');
 	
-	/* En build daarna de initiele data. */
-	build_array ();
+		/* Is er data? */
+		if (product_data != '')
+		{
+			/* En build daarna de initiele data. */
+			build_array ();
+		}
 });
