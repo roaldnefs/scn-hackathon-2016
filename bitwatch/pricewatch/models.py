@@ -64,8 +64,8 @@ class Product(models.Model):
 
 
 class Advertisement(models.Model):
-    start = models.DateTimeField(blank=True)
-    end = models.DateTimeField(blank=True)
+    start = models.DateTimeField(null=True, blank=True)
+    end = models.DateTimeField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     reference = models.CharField(max_length=255, editable=False, unique=True)
     product = models.ForeignKey(Product)
@@ -81,4 +81,4 @@ class Advertisement(models.Model):
             self.save()
 
     def __unicode__(self):
-        return u'%s - %d' % (self.product.name, self.duration)
+        return u'%s' % (self.product.name)

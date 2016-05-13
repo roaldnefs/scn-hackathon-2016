@@ -16,6 +16,12 @@ var product_data;
 /* Betaalde producten. */
 var product_special;
 
+/* Plek om aan te geven hoeveel items er al geladen zijn. */
+var current_build_iterator = 0;
+
+/* Hoeveel items laden per keer? */
+var iterator_load_each_time = 7;
+
 
 /* Wanneer de DOM (dus niet eventuele plaatjes) geladen is. */
 $(document).ready (function ()
@@ -153,71 +159,83 @@ $(document).ready (function ()
 	/* Functie om de build_array te (re)builden. */
 	function build ()
 	{
-		/* Leeg de product array. */
-		$('.product_list').html ('');
-
-			/* Is er data? */
-			if (build_array_data.length != 0)
-			{
+		/* Is er data? */
+		if (build_array_data.length != 0)
+		{
+			/* Een tijdelijke array aanmaken. */
+			var temp = {special: [], normal: []};
+			
 				/* Doorloop de gehele build array data. */
 				$.each (build_array_data, function (i, obj)
 				{
 					/* Is dit obj. een speciale object? */
 					if (product_special.in_array (obj.pk))
 					{
-						/* Maak een html var aan. */
-						var html = '<div class="col-xs-12 content_box product_yellow clearfix">';
-							html += '<div class="thumb pull-left" style="background-image: url(\'' + obj.fields.image + '\'); background-size: cover;"></div>';
-							html += '<div class="content pull-left">';
-								html += '<div class="title"><a href="/product/' + obj.fields.slug + ' ">' + obj.fields.name + '</a></div>';
-								html += '<div class="cat"><i class="fa fa-tag"></i> ' + get_cat_by_id (obj.fields.category) + '</div>';
-								html += '<div class="desc">' + obj.fields.description + '</div>';
-							html += '</div>';
-							html += '<div class="inner-fade"></div>';
-							html += '<div class="price pull-right">';
-								html += '<p><span class="btc"><i class="fa fa-btc"></i> ' + obj.fields.price + '</span></p>';
-								html += '<p><span class="eur">~ <i class="fa fa-eur"></i> ' + (obj.fields.price * 399.920).toFixed (2) + '</span></p>';
-								html += '<p><span class="view"><i class="fa fa-eye" aria-hidden="true"></i> ' + obj.fields.views + '</p>';
-							html += '</div>';
-						html += '</div>';
-					
-						/* Voeg vervolgens dit element toe aan de container. */
-						$('.product_list').append (html);
-					}
-				});
-				
-				/* Doorloop de gehele build array data. */
-				$.each (build_array_data, function (i, obj)
-				{
-					/* Is het product normaal? */
-					if (!product_special.in_array (obj.pk))
-					{
-						/* Maak een html var aan. */
-						var html = '<div class="col-xs-12 content_box clearfix">';
-							html += '<div class="thumb pull-left" style="background-image: url(\'' + obj.fields.image + '\'); background-size: cover;"></div>';
-							html += '<div class="content pull-left">';
-								html += '<div class="title"><a href="/product/' + obj.fields.slug + ' ">' + obj.fields.name + '</a></div>';
-								html += '<div class="cat"><i class="fa fa-tag"></i> ' + get_cat_by_id (obj.fields.category) + '</div>';
-								html += '<div class="desc">' + obj.fields.description + '</div>';
-							html += '</div>';
-							html += '<div class="inner-fade"></div>';
-							html += '<div class="price pull-right">';
-								html += '<p><span class="btc"><i class="fa fa-btc"></i> ' + obj.fields.price + '</span></p>';
-								html += '<p><span class="eur">~ <i class="fa fa-eur"></i> ' + (obj.fields.price * 399.920).toFixed (2) + '</span></p>';
-								html += '<p><span class="view"><i class="fa fa-eye" aria-hidden="true"></i> ' + obj.fields.views + '</p>';
-							html += '</div>';
-						html += '</div>';
+						/* Geef aan dat het een special object is. */
+						obj.special = true;
 						
-						/* Voeg vervolgens dit element toe aan de container. */
-						$('.product_list').append (html);
+						/* Knal het object in de special temp. array. */
+						temp.special.push (obj);
+					}
+					else
+					{
+						/* Geef aan dat het geen special object is. */
+						obj.special = false;
+						
+						/* Knal het object in de normale temp. array. */
+						temp.normal.push (obj);
 					}
 				});
-			}
-			else
-			{
-				/* Er zijn geen resultaten gevonden. */
-				$('.product_list').append ('<div class="col-xs-12 content_box product clearfix" style="color: gray; font-style: italic; text-align: center; padding-top: 40px;">Er zijn geen resultaten gevonden.</div>');
-			}
+			
+			/* Merge de arrays, zodat de special items bovenaan staan en de normal erna. */
+			var merged = $.merge (temp.special, temp.normal);
+			
+				/* Is de huidige iterato + het aantal items wat geladen moet worden hoger dan wat de merged array aan items heeft? */
+				if ((current_build_iterator + iterator_load_each_time) > merged.length)
+				{
+					/* Ja, dus geef de max lengte, het zelfde lengte als de merged array is. */
+					var temp_i = merged.length;
+				}
+				else
+				{
+					/* Nee, dus pak het huidige iterato, en tel hier het aantal bij op wat per keer geladen meot worden. */
+					var temp_i = (current_build_iterator + iterator_load_each_time);
+				}
+				
+				/* Doorloop nu net zovaak, als het aantal items wat weergeven moet worden. */
+				for (var i = current_build_iterator; i < temp_i; i++)
+				{
+					/* Defineer het object. */
+					var obj = merged[current_build_iterator];
+					
+					/* Maak een html var aan. */
+					var html = '<div class="col-xs-12 content_box ' + ((obj.special) ? 'product_yellow' : '') + ' clearfix">';
+						html += '<div class="thumb pull-left" style="background-image: url(\'' + obj.fields.image + '\'); background-size: cover;"></div>';
+						html += '<div class="content pull-left">';
+							html += '<div class="title"><a href="/product/' + obj.fields.slug + ' ">' + obj.fields.name + '</a></div>';
+							html += '<div class="cat"><i class="fa fa-tag"></i> ' + get_cat_by_id (obj.fields.category) + '</div>';
+							html += '<div class="desc">' + obj.fields.description + '</div>';
+						html += '</div>';
+						html += '<div class="inner-fade"></div>';
+						html += '<div class="price pull-right">';
+							html += '<p><span class="btc"><i class="fa fa-btc"></i> ' + obj.fields.price + '</span></p>';
+							html += '<p><span class="eur">~ <i class="fa fa-eur"></i> ' + (obj.fields.price * 399.920).toFixed (2) + '</span></p>';
+							html += '<p><span class="view"><i class="fa fa-eye" aria-hidden="true"></i> ' + obj.fields.views + '</p>';
+						html += '</div>';
+					html += '</div>';
+				
+					/* Voeg vervolgens dit element toe aan de container. */
+					$('.product_list').append (html);
+					
+					/* Tel 1 bij de huidige iterator op voor de volgende run in de loop. */
+					current_build_iterator++;
+				}
+		}
+		else
+		{
+			/* Er zijn geen resultaten gevonden. */
+			$('.product_list').append ('<div class="col-xs-12 content_box product clearfix" style="color: gray; font-style: italic; text-align: center; padding-top: 40px;">Er zijn geen resultaten gevonden.</div>');
+		}
 	}
 
 
@@ -266,10 +284,31 @@ $(document).ready (function ()
 
 		});
 
+		/* Leeg de product array. */
+		$('.product_list').html ('');
+		
+		/* Knal de iterator op 0. */
+		current_build_iterator = 0;
+		
 		/* Bouw de array op. */
 		build ();
 	}
-
+	
+	
+	/* Wanneer er gescrolled wordt in het document. */
+	$(window).scroll (function ()
+	{
+		/* Is het beeld 100px van de bodem verwijderd? */
+		if ($(window).scrollTop () + $(window).height () > $(document).height () - 100)
+		{
+			/* Ja! Dus laad de volgende items in. */
+			//alert("near bottom!");
+			build ();
+		}
+	});
+	
+	
+	
 
     /* Wanneer er op de mobiel knop gedrukt wordt. */
     $('.mobile_button').click (function (e)

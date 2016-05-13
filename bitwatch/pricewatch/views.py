@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 import json
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 
 def index(request):
@@ -18,7 +20,7 @@ def pricewatch(request):
     products_json = serializers.serialize('json', Product.objects.all())
     companies = Company.objects.all()
     categories = Category.objects.all()
-    advertisements = [ad.product.id for ad in Advertisement.objects.filter(paid=True)]
+    advertisements = [ad.product.id for ad in Advertisement.objects.filter(start__lte=timezone.now(), end__gte=timezone.now())]
     advertisements_json = json.dumps(advertisements)
 
     return render(
@@ -132,16 +134,21 @@ def my_product(request, slug=None):
         if form.is_valid():
             form.save()
     else:
-       form = ProductForm(instance=product)
+        form = ProductForm(instance=product)
     return render(request, 'my_product.html', {'form': form, 'product': product})
 
 
-# TODO secure
 def payment_api(request, reference=None, days=None):
     if reference is not None and days is not None:
         advertisement = Advertisement.objects.get(reference=reference)
-        if not advertisement.paid:
-            advertisement.paid = True
+        if advertisement is not None:
+            if advertisement.end is None or advertisement.end < timezone.now():
+                advertisement.start = timezone.now()
+                advertisement.end = timezone.now() + timedelta(days=int(days))
+            elif advertisement.start < timezone.now() and advertisement.end > timezone.now():
+                advertisement.end += timedelta(days=int(days))
+
             advertisement.save()
             return HttpResponse('OK')
+
     return HttpResponse('FAIL')
