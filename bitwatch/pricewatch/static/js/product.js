@@ -134,7 +134,21 @@ $(document).ready (function ()
 		/* Return de return_data. */
 		return return_data;
 	}
-
+	
+	
+	/* Functie om het aantal BTC te berekenen van de prijs + de koers. */
+	function get_btc_by_eur (euro)
+	{
+		/* Return het BTC bedrag. */
+		var btc = ((euro / 100) / exchage_bitcoin)
+		
+		/* Bereken 10 ^ 6. */
+		var t = Math.pow (10, 6);
+		
+		/* Return het geheel afgerond op 6 dec. */
+		return (Math.round (btc * t) / t).toFixed (6); 
+	}
+	
 
 	/* Functie om een categorie naam op te halen. */
 	function get_cat_by_id (id)
@@ -218,8 +232,8 @@ $(document).ready (function ()
 						html += '</div>';
 						html += '<div class="inner-fade"></div>';
 						html += '<div class="price pull-right">';
-							html += '<p><span class="btc"><i class="fa fa-btc"></i> ' + obj.fields.price + '</span></p>';
-							html += '<p><span class="eur"><i class="fa fa-eur"></i> ' + (obj.fields.price * 399.920).toFixed (2) + '</span></p>';
+							html += '<p><span class="btc"><i class="fa fa-btc"></i> ' + get_btc_by_eur (obj.fields.price) + '</span></p>';
+							html += '<p><span class="eur"><i class="fa fa-eur"></i> ' + (obj.fields.price / 100) + '</span></p>';
 							html += '<p><span class="view"><i class="fa fa-eye" aria-hidden="true"></i> ' + obj.fields.views + '</p>';
 						html += '</div>';
 					html += '</div>';
