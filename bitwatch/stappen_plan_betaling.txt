@@ -1,0 +1,16 @@
+Stap naar de 21 bitcoin computer en voor het onderstaande commando in (zonder aanhalingtekens)
+
+"21 buy ***REMOVED***:5000/pay?reference=[unieke referentiesleutel]\&days=[aantal dagen] 
+
+Hieronder een uitleg van het commando wat u net heeft in getypt. Het getal 21 commando zet de betaling
+in actie. De transactieserver verwacht op dat moment een betaling. Het adres ***REMOVED***:5000
+is betalingsportal. Het commando "/pay" vertelt welke acties wij willen verrichting. Dit is in dit geval een betaling. 
+
+de [unieke referentie] vindt u onder aan het scherm. Het is verstandig deze op de schrijven of te 
+kopieren onder uw plaktoets. Het laatste argument wat u moet meegeven is het argument
+"\&days=[aantal dagen]. Dit houdt in dat u een abbonoment activeert voor het aantal dagen wat u invoert. U betaald dus per dag een bedrag. 
+
+Indien u uw advertentie wilt verlengen hoeft u niet eerst te wachten tot uw oude abonnement u kunt
+gewoon hetzelfde commando uitvoeren de dagen worden dan opgeteld met uw oude abonnement. Indien uw abonnement verloopt zakt u advertentie(s) weer omlaag. Wilt u dan weer bovenaan in de pricewatch staan, dient uw weer een abonnement af te nemen.
+ 
+
