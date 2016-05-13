@@ -67,6 +67,7 @@ class Advertisement(models.Model):
     start = models.DateTimeField(null=True, blank=True)
     end = models.DateTimeField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
+
     reference = models.CharField(max_length=255, editable=False, unique=True)
     product = models.ForeignKey(Product)
 

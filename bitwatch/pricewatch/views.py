@@ -10,6 +10,15 @@ from django.contrib.auth.decorators import login_required
 import json
 from datetime import datetime, timedelta
 from django.utils import timezone
+from django.shortcuts import _get_queryset
+
+
+def get_object_or_none(klass, *args, **kwargs):
+    queryset = _get_queryset(klass)
+    try:
+        return queryset.get(*args, **kwargs)
+    except queryset.model.DoesNotExist:
+        return None
 
 
 def index(request):
@@ -136,6 +145,23 @@ def my_product(request, slug=None):
     else:
         form = ProductForm(instance=product)
     return render(request, 'my_product.html', {'form': form, 'product': product})
+
+@login_required(login_url='login')
+def my_advertisement(request, slug=None):
+    product = get_object_or_404(Product, slug=slug)
+    advertisement = get_object_or_none(Advertisement, product=product)
+    if advertisement is None:
+        advertisement = Advertisement()
+        advertisement.product = product
+        advertisement.save()
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = ProductForm(instance=product)
+    return render(request, 'my_advertisement.html', {'advertisement': advertisement, 'product': product})
 
 
 def payment_api(request, reference=None, days=None):

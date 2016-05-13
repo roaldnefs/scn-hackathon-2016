@@ -6,20 +6,38 @@
 
 {% block dashboard %}
 
-
-
 <div class="company_list row">
-	<h2>Mijn Producten <a href="#" class="btn btn-primary btn-xs btn-verberg-producten">Verbergen</a></h2>
-	
+	<h2>Mijn Producten <a href="#" class="btn btn-default btn-xs btn-verberg-producten pull-right">Verbergen</a></h2>
+
 		<div class="product_collaps">
 		{% for product in products %}
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="product-modal-{{ product.id }}">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{{ product.name }}</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p><strong>Hier komt de tutorial...</strong></p>
+                    <pre>asd</pre>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="{% url 'my_advertisement' product.slug %}" class="btn btn-default">Direct omhoogplaatsen</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
 			<div class="content_box">
-				<h5><a href="{{ company.url }}" target="_blank">{{ product.name }}</a></h5> 
+				<h5><a href="{% url 'product' product.slug %}">{{ product.name }}</a></h5>
 				<ul class="list-inline">
-					<li data-toggle="tooltip" data-placement="bottom" class="pull-left"  style="margin-left: 15px" title="{{ product.name }}"><i class="fa fa-btc"></i>  {{ product.price }} </li>
-					<li data-toggle="tooltip" data-placement="bottom" class="pull-left" style="margin-left: 15px" title="{{ product.name }}"><i class="fa fa-tag"></i>  {{ product.category.name }} </l>
-					<li class="pull-right"><a href="{%url 'my_product' product.slug%}" class="btn btn-primary btn-xs">Bewerken</a></h2> </li>
-					<li class="pull-right"><a href="" class="btn btn-primary btn-xs">Omhoogplaatsen</a></h2></li>
+					<li data-toggle="tooltip" data-placement="bottom" class="pull-left"  style="margin-left: 15px" title="{{ product.price }}"><i class="fa fa-btc"></i>  {{ product.price }} </li>
+					<li data-toggle="tooltip" data-placement="bottom" class="pull-left" style="margin-left: 15px" title="{{ product.category }}"><i class="fa fa-tag"></i>  {{ product.category.name }} </li>
+					<li class="pull-right"><a href="{%url 'my_product' product.slug %}" class="btn btn-default btn-xs">Bewerken</a></h2> </li>
+					<li class="pull-right"><button class="btn btn-default btn-xs" data-toggle="modal" data-target="#product-modal-{{ product.id }}">Omhoogplaatsen</button></li>
 				</ul>
 			</div>
 		{% endfor %}

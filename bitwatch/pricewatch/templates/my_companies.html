@@ -8,14 +8,14 @@
 
 <div class="company_list row">
 
-<h2>Mijn Bedrijven <a href="#" class="btn btn-primary btn-xs btn-verberg-producten">Verbergen</a></h2>
+<h2>Mijn Bedrijven <a href="#" class="btn btn-default btn-xs btn-verberg-producten pull-right">Verbergen</a></h2>
 
 
-	
+
 		<div class="product_collaps">
 		{% for company in companies %}
 			<div class="content_box">
-				<h5><a href="{{ company.url }}" target="_blank">{{ company.name }}</a></h5> 
+				<h5><a href="{{ company.url }}" target="_blank">{{ company.name }}</a></h5>
 			</div>
 		{% endfor %}
 		</div>
