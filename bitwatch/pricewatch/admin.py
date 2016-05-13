@@ -24,6 +24,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class AdvertisementAdmin(admin.ModelAdmin):
+    readonly_fields = ['reference']
+
     class Meta:
         model = models.Advertisement
         exclude = []
