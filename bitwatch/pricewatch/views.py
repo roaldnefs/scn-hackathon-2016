@@ -20,7 +20,8 @@ def pricewatch(request):
 
 
 def companies(request):
-    return render(request, 'companies.html', {})
+    companies = Company.objects.all()
+    return render(request, 'companies.html', {'companies': companies})
 
 
 def company(request, slug=None):
