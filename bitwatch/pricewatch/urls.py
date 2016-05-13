@@ -9,6 +9,9 @@ urlpatterns = [
 
     url(r'^product/(?P<slug>[a-zA-Z0-9_.-]+)$', views.product, name='product'),
 
+    url(r'^login$', views.loginview, name='login'),
+    url(r'^dashboard$', views.dashboard, name='dashboard'),
+
     url(r'^about$', views.about, name='about'),
     url(r'^', views.index, name='index'),
 ]

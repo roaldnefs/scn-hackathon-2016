@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Inloggen{% endblock %}
+
+{% block content %}
+
+<div class="container main_container">
+	<div class="row">
+		<div class="col-xs-12 box">
+			<h2>Inloggen</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Gebruikersnaam</label>
+                    <input type="username" class="form-control" id="username" placeholder="Gebruikersnaam" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Wachtwoord</label>
+                    <input type="password" class="form-control" id="password" placeholder="Wachtwoord" name="password">
+                </div>
+                <button type="submit" class="btn btn-default">Inloggen</button>
+            </form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

@@ -26,33 +26,46 @@
 </head>
 <body>
 
-<div class="modal fade login-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-    <div class="modal-dialog modal-sm">
-        <form method="post">
-            {% csrf_token %}
-            <div class="modal-content">
+<div class="modal fade login-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      {% if user.is_authenticated %}
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Inloggen</h4>
+                    <h4 class="modal-title" id="login-modal">Uitloggen</h4>
+                </div>
+                <div class="modal-body">
+                    Hi, {{ user.username }}.
+                </div>
+                <div class="modal-footer">
+                    <a href="{% url 'login' %}" class="btn btn-primary">Uitloggen</a>
+                </div>
+            {% else %}
+                <div class="modal-header">
+                <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="login-modal">Inloggen</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="login-username">Gebruikersnaam</label>
-                        <input type="email" class="form-control" id="login-username" placeholder="Gebruikersnaam">
+                        <input type="text" class="form-control" id="login-username" placeholder="Gebruikersnaam" name="username">
                     </div>
                     <div class="form-group">
                         <label for="login-password">Wachtwoord</label>
-                        <input type="password" class="form-control" id="login-password" placeholder="Wachtwoord">
+                        <input type="password" class="form-control" id="login-password" placeholder="Wachtwoord" name="password">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default">Registreren</button>
-                    <button type="button" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
                 </div>
-            </div>
-        </form>
-    </div>
-</div>
+            {% endif %}
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <div class="website_wrapper">
     <div class="fluid-container header">
@@ -72,7 +85,8 @@
                             <li><a href="{% url 'pricewatch' %}">PRICEWATCH</a></li>
                             <li><a href="{% url 'companies' %}">BEDRIJVEN</a></li>
                             <li><a href="{% url 'about' %}">OVER</a></li>
-                            <li><a class="btn btn-white" href="#" data-toggle="modal" data-target=".login-modal">LOGIN</a></li>
+                            <li><a class="btn btn-white" href="{% url 'login' %}" data-toggle="modal" data-target=".login-modal">
+                            {% if user.is_authenticated %}LOGOUT{% else %}LOGIN{% endif %}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -118,7 +132,7 @@
                 <ul class="list-inline">
                     <li>&copy; 2016 - <a href="{% url 'index' %}">BITWATCH</a></li>
                     <li><a href="{% url 'about' %}">OVER</a></li>
-                    <li><a href="#" data-toggle="modal" data-target=".login-modal">LOGIN</a></li>
+                    <li><a href="{% url 'login' %}" {% if not user.is_authenticated %}data-toggle="modal" data-target=".login-modal"{% endif %}>{% if user.is_authenticated %}LOGOUT{% else %}LOGIN{% endif %}</a></li>
                 </ul>
             </div>
         </div>
