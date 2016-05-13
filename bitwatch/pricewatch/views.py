@@ -1,6 +1,6 @@
 from django.shortcuts import HttpResponse, render, get_object_or_404
 from models import Product, Company, Category, Advertisement
-from forms import CompanyForm, ProductForm
+from forms import CompanyForm, ProductForm, UserForm
 from django.core import serializers
 from django.utils.safestring import SafeString
 from django.db.models import F
@@ -76,7 +76,15 @@ def loginview(request):
 
 
 def register(request):
-    return render(request, 'register.html', {})
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.set_password(user.password)
+            user.save()
+    else:
+        form = UserForm()
+    return render(request, 'register.html', {'form': form})
 
 
 @login_required(login_url='login')
