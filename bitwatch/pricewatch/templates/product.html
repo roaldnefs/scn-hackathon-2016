@@ -8,7 +8,7 @@
 <div class="container main_container">
     <div class="row">
         <div class="col-xs-12 box">
-            <div class="col-md-4"><img src="{% static 'images/thumbnail.jpeg' %}" alt="{{ product.name }}" style="width:100%;"></div>
+            <div class="col-md-4 product-preview"><img src="{{ product.image }}" alt="{{ product.name }}" style="width:100%;"></div>
             <div class="col-md-8">
                 <h2>{{ product.name }}</h2>
                 <ul class="list-inline">

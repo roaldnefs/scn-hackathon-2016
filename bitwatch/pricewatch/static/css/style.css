@@ -156,13 +156,14 @@ a.btn-white:visited {
     margin-bottom: 10px;
     height: 100px;
     padding-right: 0px;
+    padding-left: 0px;
 }
 
 .main_container .product_list .content_box .thumb {
     height: 100%;
     width: 100px;
-    background-image: url('../image/thumb_test.jpeg');
-    background-size: 100% 100%;
+    background-color: #EFEFEF;
+    background-position: center center;
 }
 
 .main_container .product_list .content_box .content {
@@ -236,6 +237,13 @@ a.btn-white:visited {
 
 
 
+
+/* * * * * * * * * *
+ * Product gedeelte
+ * * * * * * * * * */
+.product-preview {
+    padding-left: 0px;
+}
 
 
 

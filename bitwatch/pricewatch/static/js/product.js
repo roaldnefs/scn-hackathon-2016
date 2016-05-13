@@ -22,7 +22,7 @@ $(document).ready (function ()
 	{
 		/* Return var. */
 		var return_var = false;
-		
+
 			/* Doorloop de array. */
 			$.each (this, function (i, value)
 			{
@@ -31,17 +31,17 @@ $(document).ready (function ()
 				{
 					/* Geef aan dat we een match hebben. */
 					return_var = true;
-					
+
 					/* Ja! return true. */
 					return false;
 				}
 			});
-		
+
 		/* Geen true gereturned, dus return false. */
 		return return_var;
 	};
-	
-	
+
+
 	Array.prototype.filter = function (id)
 	{
 		/* Heeft deze array inhoud? */
@@ -54,12 +54,12 @@ $(document).ready (function ()
 				return false;
 			}
 		}
-		
+
 		/* Return een true. */
 		return true;
 	}
-	
-	
+
+
 	/* Functie om te controleren of de opgegeven prijs binnen de geselecteerde range valt. */
 	function price_in_range (input)
 	{
@@ -69,26 +69,26 @@ $(document).ready (function ()
 			/* Return dan true. */
 			return true;
 		}
-		
+
 		/* Zelfde voor high. */
 		if (price_range.high == 1000 && input >= 1000)
 		{
 			/* Return true. */
 			return true;
 		}
-		
+
 		/* Valt de prijs binnen de opgegeven data? */
 		if (input >= price_range.low && input <= price_range.high)
 		{
 			/* Ja, return true. */
 			return true;
 		}
-		
+
 		/* Geen 1 van de condities gelden. Return false. */
 		return false;
 	}
-	
-	
+
+
 	/* Functie om te controleren of een woorden array voorkomt in een string. */
 	function word_in_string (data, trefwoorden)
 	{
@@ -98,16 +98,16 @@ $(document).ready (function ()
 			/* Nee, dus return true, omdat er veder niks gefilterd hoeft te worden. */
 			return true;
 		}
-		
+
 		/* Maak een return array aan. */
 		var return_data = false;
-		
+
 		/* Lower string de data. */
 		data = data.toLowerCase ();
-		
+
 		/* Sloop de trefwoorden uit elkaar op spaties. */
 		trefwoorden_split = trefwoorden.split (' ');
-		
+
 			/* Doorloop nu elk item. */
 			$.each (trefwoorden_split, function (i, item)
 			{
@@ -116,23 +116,23 @@ $(document).ready (function ()
 				{
 					/* Zet de return data op true. */
 					return_data = true;
-					
+
 					/* Break de loop. */
 					return false;
 				}
 			});
-			
+
 		/* Return de return_data. */
 		return return_data;
 	}
-	
-	
+
+
 	/* Functie om een categorie naam op te halen. */
 	function get_cat_by_id (id)
 	{
 		/* Pak de naam van de categorie. */
 		var cat = $('input[name="filter_categorie[]"][value="' + id + '"]').parent ().text ();
-		
+
 			/* Bestaat de cat? */
 			if (cat !== undefined)
 			{
@@ -145,14 +145,14 @@ $(document).ready (function ()
 				return 'Onbekend';
 			}
 	}
-	
-	
+
+
 	/* Functie om de build_array te (re)builden. */
 	function build ()
 	{
 		/* Leeg de product array. */
 		$('.product_list').html ('');
-		
+
 			/* Is er data? */
 			if (build_array_data.length != 0)
 			{
@@ -161,7 +161,7 @@ $(document).ready (function ()
 				{
 					/* Maak een html var aan. */
 					var html = '<div class="col-xs-12 content_box product clearfix">';
-						html += '<div class="thumb pull-left" style="background-image: url(\'images/thumbnail.jpeg\');"></div>';
+						html += '<div class="thumb pull-left" style="background-image: url(\'' + obj.fields.image + '\'); background-size: cover;"></div>';
 						html += '<div class="content pull-left">';
 							html += '<div class="title"><a href="/product/' + obj.fields.slug + ' ">' + obj.fields.name + '</a></div>';
 							html += '<div class="cat"><i class="fa fa-tag"></i> ' + get_cat_by_id (obj.fields.category) + '</div>';
@@ -174,7 +174,7 @@ $(document).ready (function ()
 							html += '<p><span class="view"><i class="fa fa-eye" aria-hidden="true"></i> ' + obj.fields.views + '</p>';
 						html += '</div>';
 					html += '</div>';
-					
+
 					/* Voeg vervolgens dit element toe aan de container. */
 					$('.product_list').append (html);
 				});
@@ -185,17 +185,17 @@ $(document).ready (function ()
 				$('.product_list').append ('<div class="col-xs-12 content_box product clearfix" style="color: gray; font-style: italic; text-align: center; padding-top: 40px;">Er zijn geen resultaten gevonden.</div>');
 			}
 	}
-	
-	
+
+
 	/* Functie om de build_array te bouwen aan de hand van de ingestelde filters. */
 	function build_array ()
 	{
 		/* Maak een filter array aan. */
 		var filter = {categorie: [], company: []};
-		
+
 		/* Leeg de build_array_data array. */
 		build_array_data = new Array ();
-		
+
 		/* Doorloop alle categorieën. */
 		$('input[name="filter_categorie[]"]').each (function ()
 		{
@@ -206,8 +206,8 @@ $(document).ready (function ()
 				filter.categorie.push (parseInt ($(this).val ()));
 			}
 		});
-		
-		
+
+
 		/* Doe dit zelfde bij de bedrijven. */
 		$('input[name="filter_company[]"]').each (function ()
 		{
@@ -218,8 +218,8 @@ $(document).ready (function ()
 				filter.company.push (parseInt ($(this).val ()));
 			}
 		});
-		
-		
+
+
 		/* Doorloop door de product_data array. */
 		$.each (product_data, function (key, obj)
 		{
@@ -229,14 +229,14 @@ $(document).ready (function ()
 				/* Voeg het item toe aan de build array. */
 				build_array_data.push (obj);
 			}
-			
+
 		});
-		
+
 		/* Bouw de array op. */
 		build ();
 	}
-	
-	
+
+
     /* Wanneer er op de mobiel knop gedrukt wordt. */
     $('.mobile_button').click (function (e)
     {
@@ -287,28 +287,28 @@ $(document).ready (function ()
 				/* Geen resultaat, dus maak undefined. */
 				zoekwoorden = undefined;
 			}
-			
+
             /* Roep de build array aan. */
 			build_array ();
         }, 100);
     });
-	
-	
+
+
 	/* Wanneer een categorie geselecteerd wordt. */
 	$('input[name="filter_categorie[]"]').change (function ()
 	{
 		/* Roep de build array aan. */
 		build_array ();
     });
-	
-	
+
+
 	/* Wanneer een categorie geselecteerd wordt. */
 	$('input[name="filter_company[]"]').change (function ()
 	{
 		/* Roep de build array aan. */
 		build_array ();
 	});
-	
+
 
     /* Maak van de prijs slider een slider object. */
     $("#prijs-slider").slider ({
@@ -329,10 +329,10 @@ $(document).ready (function ()
         {
 			/* Sla de max prijs op. */
 			price_range.high = ui.values[1];
-			
+
 			/* Sla de min prijs op. */
 			price_range.low = ui.values[0];
-			
+
 				/* Is het eerste value een 1? */
 				if (ui.values[0] == 1)
 				{
@@ -349,7 +349,7 @@ $(document).ready (function ()
 
             /* Vul de waardes is de input in. */
             $('#amount').val (ui.values[0] + ' tot ' + ui.values[1]);
-			
+
 			/* Roep de build array aan. */
 			build_array ();
         }
@@ -396,11 +396,11 @@ $(document).ready (function ()
         /* Toggel de zichtbaarheid van de content, en stop de al lopende toggle als die aanwezig is. */
         content.stop ().slideToggle ('fast');
     });
-	
-	
+
+
 	/* Parse de producten (JSON formaat) naar een object. */
 	product_data = jQuery.parseJSON (product_json);
-	
+
 	/* En build daarna de initiele data. */
 	build_array ();
 });
