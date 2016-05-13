@@ -81,4 +81,4 @@ class Advertisement(models.Model):
             self.save()
 
     def __unicode__(self):
-        return u'%s - %d' % (self.product.name, self.duration)
+        return u'%s' % (self.product.name)

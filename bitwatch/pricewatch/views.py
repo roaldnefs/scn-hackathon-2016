@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 import json
+from datetime import datetime
+from django.utils import timezone
 
 
 def index(request):
@@ -18,7 +20,7 @@ def pricewatch(request):
     products_json = serializers.serialize('json', Product.objects.all())
     companies = Company.objects.all()
     categories = Category.objects.all()
-    advertisements = [ad.product.id for ad in Advertisement.objects.filter(paid=True)]
+    advertisements = [ad.product.id for ad in Advertisement.objects.filter(start__lte=timezone.now(), end__gte=timezone.now())]
     advertisements_json = json.dumps(advertisements)
 
     return render(
@@ -140,8 +142,7 @@ def my_product(request, slug=None):
 def payment_api(request, reference=None, days=None):
     if reference is not None and days is not None:
         advertisement = Advertisement.objects.get(reference=reference)
-        if not advertisement.paid:
-            advertisement.paid = True
-            advertisement.save()
-            return HttpResponse('OK')
+        if advertisement is not None:
+            if advertisement.start < timezone.now() and advertisement.end > timezone.now():
+                return HttpResponse('OK')
     return HttpResponse('FAIL')
