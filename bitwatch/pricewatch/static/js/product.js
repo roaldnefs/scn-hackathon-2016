@@ -219,7 +219,7 @@ $(document).ready (function ()
 						html += '<div class="inner-fade"></div>';
 						html += '<div class="price pull-right">';
 							html += '<p><span class="btc"><i class="fa fa-btc"></i> ' + obj.fields.price + '</span></p>';
-							html += '<p><span class="eur">~ <i class="fa fa-eur"></i> ' + (obj.fields.price * 399.920).toFixed (2) + '</span></p>';
+							html += '<p><span class="eur"><i class="fa fa-eur"></i> ' + (obj.fields.price * 399.920).toFixed (2) + '</span></p>';
 							html += '<p><span class="view"><i class="fa fa-eye" aria-hidden="true"></i> ' + obj.fields.views + '</p>';
 						html += '</div>';
 					html += '</div>';
