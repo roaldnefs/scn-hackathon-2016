@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.db import models
+import uuid
 
 
 class Category(models.Model):
@@ -70,12 +71,20 @@ class Advertisement(models.Model):
     cost = models.DecimalField(max_digits=17, decimal_places=8)
     paid = models.BooleanField(default=False)
 
+    reference = models.CharField(max_length=255, editable=False, unique=True)
+
     product = models.ForeignKey(Product)
     buyer = models.ForeignKey(User)
 
     class Meta:
         verbose_name = 'advertentie'
         verbose_name_plural = 'advertenties'
+
+    def save(self, *args, **kwargs):
+        super(Advertisement, self).save(*args, **kwargs)
+        if not self.reference:
+            self.reference = str(self.id) + uuid.uuid4().hex[:19].upper()
+            self.save()
 
     def __unicode__(self):
         return u'%s - %d' % (self.product.name, self.duration)

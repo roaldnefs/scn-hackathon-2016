@@ -110,6 +110,7 @@ def my_companies(request):
     return render(request, 'my_companies.html', {'companies': companies, 'form': form})
 
 
+@login_required(login_url='login')
 def my_products(request):
     user = request.user
     if request.method == 'POST':
@@ -121,3 +122,26 @@ def my_products(request):
     companies = Company.objects.filter(owner=user)
     products = Product.objects.filter(company__in=companies)
     return render(request, 'my_products.html', {'products': products, 'form': form})
+
+
+@login_required(login_url='login')
+def my_product(request, slug=None):
+    product = get_object_or_404(Product, slug=slug)
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+       form = ProductForm(instance=product)
+    return render(request, 'my_product.html', {'form': form, 'product': product})
+
+
+# TODO secure
+def payment_api(request, reference=None):
+    if reference is not None:
+        advertisement = Advertisement.objects.get(reference=reference)
+        if not advertisement.paid:
+            advertisement.paid = True
+            advertisement.save()
+            return HttpResponse('OK')
+    return HttpResponse('FAIL')
