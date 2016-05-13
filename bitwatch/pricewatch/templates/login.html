@@ -9,6 +9,9 @@
 	<div class="row">
 		<div class="col-xs-12 box">
 			<h2>Inloggen</h2>
+            {% if state %}
+                <div class="alert alert-danger" role="alert">{{ state }}</div>
+            {% endif %}
             <form method="post">
                 {% csrf_token %}
                 <div class="form-group">

@@ -5,6 +5,7 @@ from django.utils.safestring import SafeString
 from django.db.models import F
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -41,9 +42,8 @@ def about(request):
 
 
 def loginview(request):
-    # Logout
     logout(request)
-    # Check if form is submitted
+    state = None
     if request.POST:
         username = request.POST['username']
         password = request.POST['password']
@@ -51,14 +51,17 @@ def loginview(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                # TODO change to dashboard
-                return HttpResponseRedirect('index')
-    return render(request, 'login.html', {})
+                return HttpResponseRedirect('dashboard')
+            else:
+                state = 'Sorry, uw account is nog niet geactiveerd!'
+        else:
+            state = 'Sorry, uw inlog poging is niet geldig!'
+    return render(request, 'login.html', {'state': state})
 
 
 def register(request):
     return render(request, 'register.html', {})
 
-
+@login_required(login_url='login')
 def dashboard(request):
     return render(request, 'dashboard.html', {})
