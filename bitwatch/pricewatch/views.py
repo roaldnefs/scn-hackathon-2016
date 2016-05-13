@@ -26,15 +26,6 @@ def companies(request):
     return render(request, 'companies.html', {'companies': companies})
 
 
-def company(request, slug=None):
-    company = get_object_or_404(Company, pk=id)
-    return render(
-        request,
-        'company.html',
-        {'company': company}
-    )
-
-
 def product(request, slug=None):
     product = get_object_or_404(Product, slug=slug)
     # Do a transaction to increment the views.
