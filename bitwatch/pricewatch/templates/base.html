@@ -85,6 +85,7 @@
                             <li><a href="{% url 'pricewatch' %}">PRICEWATCH</a></li>
                             <li><a href="{% url 'companies' %}">BEDRIJVEN</a></li>
                             <li><a href="{% url 'about' %}">OVER</a></li>
+                            {% if user.is_authenticated %}<li><a class="btn btn-white" href="{% url 'dashboard' %}">DASHBOARD</a></li>{% endif %}
                             <li><a class="btn btn-white" href="{% if user.is_authenticated %}{% url 'login' %}{% else %}#{% endif %}" {% if not user.is_authenticated %}data-toggle="modal" data-target=".login-modal" {% endif %}>
                             {% if user.is_authenticated %}LOGOUT{% else %}LOGIN{% endif %}</a></li>
                         </ul>
