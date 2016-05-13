@@ -302,7 +302,6 @@ $(document).ready (function ()
 		if ($(window).scrollTop () + $(window).height () > $(document).height () - 100)
 		{
 			/* Ja! Dus laad de volgende items in. */
-			//alert("near bottom!");
 			build ();
 		}
 	});
@@ -381,6 +380,27 @@ $(document).ready (function ()
 		/* Roep de build array aan. */
 		build_array ();
 	});
+	
+	
+	/* Wanneer de euro vulta wordt getoggled. */
+	$('input[name="filter_vulta[]"]').change (function ()
+	{
+		/* Gaat het om euro? */
+		if ($(this).val() == 'show_euro')
+		{
+			/* Is de box gechecked? */
+			if ($(this).is (':checked'))
+			{
+				/* Ja, dus laat alles zien. */
+				$('.product_list .eur').show ();
+			}
+			else
+			{
+				/* Nee, dus verberg alles. */
+				$('.product_list .eur').hide ();
+			}
+		}
+	});
 
 
     /* Maak van de prijs slider een slider object. */
@@ -428,6 +448,7 @@ $(document).ready (function ()
         }
     });
 
+	/* Laat de nieuwe waardes in de filter bar zien. */
     $('#amount').val (' < ' + $('#prijs-slider').slider ('values', 0) + ' tot ' + $('#prijs-slider').slider ('values', 1));
 
 
