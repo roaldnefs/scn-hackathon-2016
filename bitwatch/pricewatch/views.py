@@ -1,5 +1,5 @@
 from django.shortcuts import HttpResponse, render, get_object_or_404
-from models import Product, Company, Category
+from models import Product, Company, Category, Advertisement
 from forms import CompanyForm, ProductForm
 from django.core import serializers
 from django.utils.safestring import SafeString
@@ -7,6 +7,7 @@ from django.db.models import F
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+import json
 
 
 def index(request):
@@ -17,10 +18,13 @@ def pricewatch(request):
     products_json = serializers.serialize('json', Product.objects.all())
     companies = Company.objects.all()
     categories = Category.objects.all()
+    advertisements = [ad.product.id for ad in Advertisement.objects.filter(paid=True)]
+    advertisements_json = json.dumps(advertisements)
+
     return render(
         request,
         'pricewatch.html',
-        {'products_json': SafeString(products_json), 'companies': companies, 'categories': categories})
+        {'products_json': SafeString(products_json), 'advertisements_json': SafeString(advertisements_json), 'companies': companies, 'categories': categories})
 
 
 def companies(request):
