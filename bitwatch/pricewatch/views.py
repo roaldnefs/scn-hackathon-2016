@@ -137,8 +137,8 @@ def my_product(request, slug=None):
 
 
 # TODO secure
-def payment_api(request, reference=None):
-    if reference is not None:
+def payment_api(request, reference=None, days=None):
+    if reference is not None and days is not None:
         advertisement = Advertisement.objects.get(reference=reference)
         if not advertisement.paid:
             advertisement.paid = True
