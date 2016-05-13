@@ -26,7 +26,9 @@
                 <div class="header"><i class="fa fa-caret-down" aria-hidden="true"></i> Categorie</div>
                 <div class="content">
                     {% for category in categories %}
-                        {{ category.name }} - {{ category.id }}
+						<div class="checkbox">
+							<label><input type="checkbox" name="filter_categorie[]" value="{{ category.id }}">{{ category.name }}</label>
+						</div>
                     {% endfor %}
                 </div>
             </div>
@@ -34,7 +36,9 @@
                 <div class="header"><i class="fa fa-caret-down" aria-hidden="true"></i> Bedrijf</div>
                 <div class="content">
                     {% for company in companies %}
-                        {{ company.name }} - {{ company.id }}
+						<div class="checkbox">
+							<label><input type="checkbox" name="filter_company[]" value="{{ company.id }}">{{ company.name }}</label>
+						</div>					
                     {% endfor %}
                 </div>
             </div>
@@ -43,11 +47,8 @@
 
         <div class="col-md-8 col-md-offset-1">
             <div class="row product_list">
-
-                <script>
-                {{ products_json }}
-                </script>
-
+			
+				<!--
                 <div class="col-xs-12 content_box product clearfix">
                     <div class="thumb pull-left" style="background-image: url('{% static 'images/thumbnail.jpeg' %}');"></div>
 
@@ -63,43 +64,14 @@
                         <p><span class="view"><i class="fa fa-eye" aria-hidden="true"></i> 10</p>
                     </div>
                 </div>
-
-
-
-                <div class="col-xs-12 content_box product clearfix">
-                    <div class="thumb pull-left" style="background-image: url('{% static 'images/thumbnail.jpeg' %}');"></div>
-
-                    <div class="content pull-left">
-                        <div class="title">Een vierkante televisie</div>
-                        <div class="cat"><i class="fa fa-tag"></i> Televisies</div>
-                        <div class="desc">Dit is een mooie, maar vierkante TV. Naast een kapot scherm, mist het power knopje ook.</div>
-                    </div>
-
-                    <div class="price pull-right">
-                        <p><span class="btc"><i class="fa fa-btc"></i> 0.00123456</span></p>
-                        <p><span class="eur"><i class="fa fa-eur"></i> 0.0012</span></p>
-                        <p><span class="view"><i class="fa fa-eye" aria-hidden="true"></i> 10</p>
-                    </div>
-                </div>
-
-
-                <div class="col-xs-12 content_box product clearfix">
-                    <div class="thumb pull-left" style="background-image: url('{% static 'images/thumbnail.jpeg' %}');"></div>
-
-                    <div class="content pull-left">
-                        <div class="title">Een vierkante televisie</div>
-                        <div class="cat"><i class="fa fa-tag"></i> Televisies</div>
-                        <div class="desc">Dit is een mooie, maar vierkante TV. Naast een kapot scherm, mist het power knopje ook.</div>
-                    </div>
-
-                    <div class="price pull-right">
-                        <p><span class="btc"><i class="fa fa-btc"></i> 0.00123456</span></p>
-                        <p><span class="eur"><i class="fa fa-eur"></i> 0.0012</span></p>
-                        <p><span class="view"><i class="fa fa-eye" aria-hidden="true"></i> 10</p>
-                    </div>
-                </div>
+				-->
+				
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+	var product_json = '{{ products_json }}';
+</script>
 {% endblock %}
