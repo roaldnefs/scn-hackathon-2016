@@ -6,13 +6,20 @@
 
 {% block dashboard %}
 
+
+
+<div class="company_list row">
 <h2>Mijn Producten</h2>
-
-{% for product in products %}
-    {{ product.name }}
-{% endfor %}
-
-
+		<div class="product_collaps">
+		{% for product in products %}
+			<div class="content_box">
+				<h5><a href="{{ company.url }}" target="_blank">{{ product.name }}</a></h5> 
+				<ul class="list-inline">
+					<li data-toggle="tooltip" data-placement="bottom" style="margin-left: 15px" title="{{ product.name }}"><i class="fa fa-btc"></i>  {{ product.price }} </li>
+				</ul>
+			</div>
+		{% endfor %}
+		</div>
 <div class="panel panel-default">
     <div class="panel-heading">Nieuw product toevoegen</div>
     <div class="panel-body">
