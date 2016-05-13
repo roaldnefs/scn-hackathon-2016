@@ -16,7 +16,10 @@
 			<div class="content_box">
 				<h5><a href="{{ company.url }}" target="_blank">{{ product.name }}</a></h5> 
 				<ul class="list-inline">
-					<li data-toggle="tooltip" data-placement="bottom" style="margin-left: 15px" title="{{ product.name }}"><i class="fa fa-btc"></i>  {{ product.price }} </li>
+					<li data-toggle="tooltip" data-placement="bottom" class="pull-left"  style="margin-left: 15px" title="{{ product.name }}"><i class="fa fa-btc"></i>  {{ product.price }} </li>
+					<li data-toggle="tooltip" data-placement="bottom" class="pull-left" style="margin-left: 15px" title="{{ product.name }}"><i class="fa fa-tag"></i>  {{ product.category.name }} </l>
+					<li class="pull-right"><a href="{%url 'my_product' product.slug%}" class="btn btn-primary btn-xs">Bewerken</a></h2> </li>
+					<li class="pull-right"><a href="" class="btn btn-primary btn-xs">Omhoogplaatsen</a></h2></li>
 				</ul>
 			</div>
 		{% endfor %}
