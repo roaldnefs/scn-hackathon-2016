@@ -73,11 +73,13 @@
             <div class="row desktop_menu">
                 <div class="col-xs-12 clearfix">
                     <div class="logo pull-left clearfix">
-                        <span class="fa-stack fa-lg pull-left">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-btc fa-stack-1x"></i>
-                        </span>
-                        <span class="text pull-left">WATCH</span>
+						<a href="{% url 'index' %}" style="color: white">
+							<span class="fa-stack fa-lg pull-left">
+								<i class="fa fa-circle fa-stack-2x"></i>
+								<i class="fa fa-btc fa-stack-1x"></i>
+							</span>
+							<span class="text pull-left">WATCH</span>
+						</a>
                     </div>
                     <div class="menu pull-right">
                         <ul>
@@ -97,13 +99,15 @@
             </div>
             <div class="row mobile_button">
                 <a class="btn btn-white pull-right" href="#">MENU</a>
-                <div class="logo pull-left clearfix">
-                    <span class="fa-stack fa-lg pull-left">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-btc fa-stack-1x"></i>
-                    </span>
-                    <span class="text pull-left">WATCH</span>
-                </div>
+				<a href="{% url 'index' %}" style="color: white">
+					<div class="logo pull-left clearfix">
+						<span class="fa-stack fa-lg pull-left">
+							<i class="fa fa-circle fa-stack-2x"></i>
+							<i class="fa fa-btc fa-stack-1x"></i>
+						</span>
+						<span class="text pull-left">WATCH</span>
+					</div>
+				</a>
             </div>
         </div>
     </div>
@@ -112,11 +116,12 @@
             <div class="row">
                 <div class="col-xs-12">
                     <ul>
-                        <li><span style="color: white">></span> <a href="#">HOME</a></li>
-                        <li><span style="color: white">></span> <a href="#">PRICEWATCH</a></li>
-                        <li><span style="color: white">></span> <a href="#">BEDRIJVEN</a></li>
-                        <li><span style="color: white">></span> <a href="#">OVER</a></li>
-                        <li><span style="color: white">></span> <a href="#">LOGIN</a></li>
+                        <li><span style="color: white">></span> <a href="{% url 'index' %}">HOME</a></li>
+                        <li><span style="color: white">></span> <a href="{% url 'pricewatch' %}">PRICEWATCH</a></li>
+                        <li><span style="color: white">></span> <a href="{% url 'companies' %}">BEDRIJVEN</a></li>
+                        <li><span style="color: white">></span> <a href="{% url 'about' %}">OVER</a></li>
+                        {% if user.is_authenticated %}<li><span style="color: white">></span> <a href="{% url 'dashboard' %}">DASHBOARD</a></li>{% endif %}
+                        <li><span style="color: white">></span> <a href="{% if user.is_authenticated %}{% url 'login' %}{% else %}#{% endif %}" {% if not user.is_authenticated %}data-toggle="modal" data-target=".login-modal" {% endif %}>{% if user.is_authenticated %}LOGOUT{% else %}LOGIN{% endif %}</a></li>
                     </ul>
                 </div>
             </div>
@@ -132,6 +137,7 @@
             <div class="col-xs-12">
                 <ul class="list-inline">
                     <li>&copy; 2016 - <a href="{% url 'index' %}">BITWATCH</a></li>
+                    <li><a href="{% url 'pricewatch' %}">PRICEWATCH</a></li>
                     <li><a href="{% url 'about' %}">OVER</a></li>
                     <li><a href="{% url 'login' %}" {% if not user.is_authenticated %}data-toggle="modal" data-target=".login-modal"{% endif %}>{% if user.is_authenticated %}LOGOUT{% else %}LOGIN{% endif %}</a></li>
                 </ul>
