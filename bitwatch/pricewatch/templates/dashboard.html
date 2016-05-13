@@ -1,39 +1,10 @@
-{% extends "base.html" %}
+{% extends "dashboard_base.html" %}
 {% load staticfiles %}
 
 {% block title %}Dashboard{% endblock %}
 
-{% block content %}
+{% block dashboard %}
 
-<div class="container main_container">
-	<div class="row">
-		<div class="col-xs-12">
-            <div class="box">
-                <h2>Dashboard</h2>
-            </div>
-		</div>
-	</div>
-</div>
-
-<div class="container main_container">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="box">
-                <ul>
-                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                    <li><a href="{% url 'profile' %}">Profiel</a></li>
-                    <li><a href="#">Mijn Bedrijven</a></li>
-                    <li><a href="#">Mijn Producten</a></li>
-                    <li><a href="{% url 'login' %}">Uitloggen</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div class="box">
-                {% block dashboard %}{% endblock %}
-            </div>
-        </div>
-    </div>
-</div>
+<h2>Dashboard</h2>
 
 {% endblock %}
