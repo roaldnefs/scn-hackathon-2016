@@ -219,6 +219,20 @@ a.btn-white:visited {
 }
 
 
+.main_container .company_list {
+	
+}
+
+.main_container .company_list .content_box {
+	background-color: white;
+    box-shadow: 2px 2px 5px rgb(200,200,200);
+    overflow: hidden;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	padding: 0px 10px 20px 10px;
+}
+
+
 
 
 /* * * * * * * * * *

@@ -5,18 +5,17 @@
 
 {% block content %}
 <div class="container main_container">
-    <h1>Bedrijven</h1>
-        <div class="col-md2 product_list">
-            <div class=content>
-                {% for company in companies %}
-                <div class="row-md-5 content_box maring-left">
-                <h4>{{ company.name }}</h4> 
-                <br/>
-                <br>
-                {{company.description}}
-                </div>
-            </div>
-                {% endfor %}
-        </div>
+    <h2>Bedrijven</h2>
+	<div class="company_list row">
+		{% for company in companies %}
+			<div class="content_box">
+				<h3><a href="{{ company.url }}" target="_blank">{{ company.name }}</a></h3> 
+				<ul class="list-inline">
+					<li data-toggle="tooltip" data-placement="bottom" style="margin-left: 15px" title="Het KvK-nummer van {{ company.name }}"><i class="fa fa-building"></i> KvK-nummer: {{ company.kvk }} </li>
+				</ul>
+				{{company.description}}
+			</div>
+		{% endfor %}
+	</div>
 </div>
 {% endblock %}
