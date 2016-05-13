@@ -143,10 +143,11 @@ $(document).ready (function ()
 					var html = '<div class="col-xs-12 content_box product clearfix">';
 						html += '<div class="thumb pull-left" style="background-image: url(\'images/thumbnail.jpeg\');"></div>';
 						html += '<div class="content pull-left">';
-							html += '<div class="title">' + obj.fields.name + '</div>';
+							html += '<div class="title"><a href="/product/' + obj.fields.slug + ' ">' + obj.fields.name + '</a></div>';
 							html += '<div class="cat"><i class="fa fa-tag"></i> ' + obj.fields.category + '</div>';
 							html += '<div class="desc">' + obj.fields.description + '</div>';
 						html += '</div>';
+						html += '<div class="inner-fade"></div>';
 						html += '<div class="price pull-right">';
 							html += '<p><span class="btc"><i class="fa fa-btc"></i> ' + obj.fields.price + '</span></p>';
 							html += '<p><span class="eur"><i class="fa fa-eur"></i> ??.??</span></p>';
