@@ -127,6 +127,26 @@ $(document).ready (function ()
 	}
 	
 	
+	/* Functie om een categorie naam op te halen. */
+	function get_cat_by_id (id)
+	{
+		/* Pak de naam van de categorie. */
+		var cat = $('input[name="filter_categorie[]"][value="' + id + '"]').parent ().text ();
+		
+			/* Bestaat de cat? */
+			if (cat !== undefined)
+			{
+				/* Ja, dus return deze. */
+				return cat;
+			}
+			else
+			{
+				/* Nee, dus return 'onbekend'. */
+				return 'Onbekend';
+			}
+	}
+	
+	
 	/* Functie om de build_array te (re)builden. */
 	function build ()
 	{
@@ -144,7 +164,7 @@ $(document).ready (function ()
 						html += '<div class="thumb pull-left" style="background-image: url(\'images/thumbnail.jpeg\');"></div>';
 						html += '<div class="content pull-left">';
 							html += '<div class="title"><a href="/product/' + obj.fields.slug + ' ">' + obj.fields.name + '</a></div>';
-							html += '<div class="cat"><i class="fa fa-tag"></i> ' + obj.fields.category + '</div>';
+							html += '<div class="cat"><i class="fa fa-tag"></i> ' + get_cat_by_id (obj.fields.category) + '</div>';
 							html += '<div class="desc">' + obj.fields.description + '</div>';
 						html += '</div>';
 						html += '<div class="inner-fade"></div>';
