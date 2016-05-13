@@ -1,8 +1,22 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-{% block title %}Bedrijven{% endblock %}
+{% block title %}Pricewatch{% endblock %}
 
 {% block content %}
-<h1>Bedrijven</h1>
+<div class="container main_container">
+    <h1>Bedrijven</h1>
+        <div class="col-md2 product_list">
+            <div class=content>
+                {% for company in companies %}
+                <div class="row-md-5 content_box maring-left">
+                <h4>{{ company.name }}</h4> 
+                <br/>
+                <br>
+                {{company.description}}
+                </div>
+            </div>
+                {% endfor %}
+        </div>
+</div>
 {% endblock %}
