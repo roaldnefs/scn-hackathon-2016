@@ -17,7 +17,7 @@ urlpatterns = [
     url(r'^dashboard/product/(?P<slug>[a-zA-Z0-9_.-]+)$', views.my_product, name='my_product'),
     url(r'^dashboard$', views.dashboard, name='dashboard'),
 
-    url(r'^pay/(?P<reference>[A-Z0-9]+)/(?P<days>[0-9]+)$', views.payment_api, name='payment_api'),
+    url(r'^pay/(?P<reference>[A-Z0-9]+)/(?P<days>\d+)$', views.payment_api, name='payment_api'),
 
     url(r'^about$', views.about, name='about'),
     url(r'^', views.index, name='index'),
