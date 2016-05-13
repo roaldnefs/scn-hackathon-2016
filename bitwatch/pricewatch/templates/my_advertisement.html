@@ -12,7 +12,35 @@
     Start: {{ advertisement.start }}
     Eind: {{ advertisement.end }}
 
-    Reference: <pre>{{ advertisement.reference }}</pre>
+    </p>
+
+        <strong><p>Betalinginstructies</p></strong>
+    <p>
+		Stap naar de 21 bitcoin computer en voor het onderstaande commando in (zonder aanhalingtekens)
+
+	<pre>"21 buy ***REMOVED***:5000/pay?reference={{ advertisement.reference }}\&days=1
+	</pre>
+	</p>
+
+	<p>
+	Hieronder een uitleg van het commando wat u net heeft in getypt. Het <pre>21 commando</pre> zet de betaling
+	in actie. <pre>***REMOVED***:5000</pre>. 
+	Het commando <pre>"/pay"</pre> 
+	vertelt welke acties wij willen verrichting. 
+	</p>
+	<p>
+	<pre>unieke referentie</pre> vindt u onder aan het scherm. Deze is voor uw al in de link geplaatst Het laatste argument geeft aan hoeveel dagen het product bovenaan de pricewatch moet staan. Standaard staat deze op 1 dag, u kunt dit veranderen naar het aantal dagen dat uw advertentie boven aan de priceewatch staat. 
+	</p>
+	<p>
+	Indien u uw advertentie wilt verlengen hoeft u niet eerst te wachten tot uw oude abonnement u kunt
+	gewoon hetzelfde commando uitvoeren de dagen 
+ 	worden dan opgeteld met uw oude abonnement. 
+ 	Indien uw abonnement verloopt zakt u advertentie(s) weer omlaag. 
+ 	Wilt u dan weer bovenaan in de pricewatch staan, dient uw weer 	een abonnement af te nemen.
+ 	</p>
+
+
+    Referentiesleutel: <pre>{{ advertisement.reference }}</pre>
 </p>
 
 {% endblock %}
