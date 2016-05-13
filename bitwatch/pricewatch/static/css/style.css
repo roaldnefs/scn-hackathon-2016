@@ -263,6 +263,22 @@ a.btn-white:visited {
 
 
 /* * * * * * * * * *
+ * Over gedeelte
+ * * * * * * * * * */
+.team_container {
+	margin-top: 25px;
+}
+ 
+.team_container .name {
+	font-size: 20px;
+	text-align: center;
+	margin-top: 25px;
+}
+ 
+
+
+
+/* * * * * * * * * *
  * Footer gedeelte
  * * * * * * * * * */
 .footer {
