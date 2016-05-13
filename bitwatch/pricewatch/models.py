@@ -60,3 +60,22 @@ class Product(models.Model):
 
     def __unicode__(self):
         return u'%s - %s - %d' % (self.name, self.company.name, self.price)
+
+
+class Advertisement(models.Model):
+    start = models.DateTimeField(blank=True)
+    end = models.DateTimeField(blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    duration = models.IntegerField(default=0)
+    cost = models.DecimalField(max_digits=17, decimal_places=8)
+    paid = models.BooleanField(default=False)
+
+    product = models.ForeignKey(Product)
+    buyer = models.ForeignKey(User)
+
+    class Meta:
+        verbose_name = 'advertentie'
+        verbose_name_plural = 'advertenties'
+
+    def __unicode__(self):
+        return u'%s - %d' % (self.product.name, self.duration)

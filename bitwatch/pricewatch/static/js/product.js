@@ -13,6 +13,9 @@ var zoekwoorden = undefined;
 /* Producten object. */
 var product_data;
 
+/* Betaalde producten. */
+var product_special;
+
 
 /* Wanneer de DOM (dus niet eventuele plaatjes) geladen is. */
 $(document).ready (function ()
@@ -159,24 +162,55 @@ $(document).ready (function ()
 				/* Doorloop de gehele build array data. */
 				$.each (build_array_data, function (i, obj)
 				{
-					/* Maak een html var aan. */
-					var html = '<div class="col-xs-12 content_box product clearfix">';
-						html += '<div class="thumb pull-left" style="background-image: url(\'' + obj.fields.image + '\'); background-size: cover;"></div>';
-						html += '<div class="content pull-left">';
-							html += '<div class="title"><a href="/product/' + obj.fields.slug + ' ">' + obj.fields.name + '</a></div>';
-							html += '<div class="cat"><i class="fa fa-tag"></i> ' + get_cat_by_id (obj.fields.category) + '</div>';
-							html += '<div class="desc">' + obj.fields.description + '</div>';
+					/* Is dit obj. een speciale object? */
+					if (product_special.in_array (obj.pk))
+					{
+						/* Maak een html var aan. */
+						var html = '<div class="col-xs-12 content_box product_yellow clearfix">';
+							html += '<div class="thumb pull-left" style="background-image: url(\'' + obj.fields.image + '\'); background-size: cover;"></div>';
+							html += '<div class="content pull-left">';
+								html += '<div class="title"><a href="/product/' + obj.fields.slug + ' ">' + obj.fields.name + '</a></div>';
+								html += '<div class="cat"><i class="fa fa-tag"></i> ' + get_cat_by_id (obj.fields.category) + '</div>';
+								html += '<div class="desc">' + obj.fields.description + '</div>';
+							html += '</div>';
+							html += '<div class="inner-fade"></div>';
+							html += '<div class="price pull-right">';
+								html += '<p><span class="btc"><i class="fa fa-btc"></i> ' + obj.fields.price + '</span></p>';
+								html += '<p><span class="eur">~ <i class="fa fa-eur"></i> ' + (obj.fields.price * 399.920).toFixed (2) + '</span></p>';
+								html += '<p><span class="view"><i class="fa fa-eye" aria-hidden="true"></i> ' + obj.fields.views + '</p>';
+							html += '</div>';
 						html += '</div>';
-						html += '<div class="inner-fade"></div>';
-						html += '<div class="price pull-right">';
-							html += '<p><span class="btc"><i class="fa fa-btc"></i> ' + obj.fields.price + '</span></p>';
-							html += '<p><span class="eur">~ <i class="fa fa-eur"></i> ' + (obj.fields.price * 399.920).toFixed (2) + '</span></p>';
-							html += '<p><span class="view"><i class="fa fa-eye" aria-hidden="true"></i> ' + obj.fields.views + '</p>';
+					
+						/* Voeg vervolgens dit element toe aan de container. */
+						$('.product_list').append (html);
+					}
+				});
+				
+				/* Doorloop de gehele build array data. */
+				$.each (build_array_data, function (i, obj)
+				{
+					/* Is het product normaal? */
+					if (!product_special.in_array (obj.pk))
+					{
+						/* Maak een html var aan. */
+						var html = '<div class="col-xs-12 content_box clearfix">';
+							html += '<div class="thumb pull-left" style="background-image: url(\'' + obj.fields.image + '\'); background-size: cover;"></div>';
+							html += '<div class="content pull-left">';
+								html += '<div class="title"><a href="/product/' + obj.fields.slug + ' ">' + obj.fields.name + '</a></div>';
+								html += '<div class="cat"><i class="fa fa-tag"></i> ' + get_cat_by_id (obj.fields.category) + '</div>';
+								html += '<div class="desc">' + obj.fields.description + '</div>';
+							html += '</div>';
+							html += '<div class="inner-fade"></div>';
+							html += '<div class="price pull-right">';
+								html += '<p><span class="btc"><i class="fa fa-btc"></i> ' + obj.fields.price + '</span></p>';
+								html += '<p><span class="eur">~ <i class="fa fa-eur"></i> ' + (obj.fields.price * 399.920).toFixed (2) + '</span></p>';
+								html += '<p><span class="view"><i class="fa fa-eye" aria-hidden="true"></i> ' + obj.fields.views + '</p>';
+							html += '</div>';
 						html += '</div>';
-					html += '</div>';
-
-					/* Voeg vervolgens dit element toe aan de container. */
-					$('.product_list').append (html);
+						
+						/* Voeg vervolgens dit element toe aan de container. */
+						$('.product_list').append (html);
+					}
 				});
 			}
 			else
@@ -400,7 +434,10 @@ $(document).ready (function ()
 
 	/* Parse de producten (JSON formaat) naar een object. */
 	product_data = jQuery.parseJSON (product_json);
-
+	
+	/* Parse de speciale producten. */
+	product_special = jQuery.parseJSON (advertisements_json);
+	
 	/* En build daarna de initiele data. */
 	build_array ();
 });
