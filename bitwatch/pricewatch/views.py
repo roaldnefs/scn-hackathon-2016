@@ -154,13 +154,6 @@ def my_advertisement(request, slug=None):
         advertisement = Advertisement()
         advertisement.product = product
         advertisement.save()
-
-    if request.method == 'POST':
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            form.save()
-    else:
-        form = ProductForm(instance=product)
     return render(request, 'my_advertisement.html', {'advertisement': advertisement, 'product': product})
 
 
@@ -173,8 +166,6 @@ def payment_api(request, reference=None, days=None):
                 advertisement.end = timezone.now() + timedelta(days=int(days))
             elif advertisement.start < timezone.now() and advertisement.end > timezone.now():
                 advertisement.end += timedelta(days=int(days))
-
             advertisement.save()
             return HttpResponse('OK')
-
     return HttpResponse('FAIL')
