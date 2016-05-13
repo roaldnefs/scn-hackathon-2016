@@ -62,6 +62,29 @@ def loginview(request):
 def register(request):
     return render(request, 'register.html', {})
 
+
 @login_required(login_url='login')
 def dashboard(request):
     return render(request, 'dashboard.html', {})
+
+
+@login_required(login_url='login')
+def profile(request):
+    user = request.user
+    password_error_state = None
+    password_success_state = None
+    if request.POST:
+        old_password = request.POST['old_password']
+        new_password = request.POST['new_password']
+        check_password = request.POST['check_password']
+        if new_password == check_password:
+            if authenticate(username=user.username, password=old_password):
+                user.set_password(new_password)
+                user.save()
+                password_success_state = 'Wachtwoord succesvol gewijzigd!'
+            else:
+                password_error_state = 'Huidige wachtwoord onjuist!'
+        else:
+            password_error_state = 'Nieuwe wachtwoord komt niet overeen met de wachtwoord check!'
+
+    return render(request, 'profile.html', {'password_error_state': password_error_state, 'password_success_state': password_success_state})
