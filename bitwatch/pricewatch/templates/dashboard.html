@@ -6,16 +6,22 @@
 
 {% block dashboard %}
 
-<h2>Dashboard</h2>
-	<div  class="panel panel-default">
-		<h5> Top 5 bezichtigingen </h5>
-		{% for part in part %}
-
-		<div>{{part.name}}
-		{{part.views}}</div>
-		 {% endfor %}
-
-	</div>  
- 
+<h3>Top 5 bezichtigingen</h3>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th class="col-xs-8">Naam</th>
+				<th class="col-xs-4">Aantal views</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for part in part %}
+				<tr>
+					<td>{{part.name}}</td>
+					<td>{{part.views}}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}
 
