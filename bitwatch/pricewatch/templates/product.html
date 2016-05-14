@@ -26,7 +26,7 @@
                     <li data-toggle="tooltip" data-placement="bottom" title="Aantal keer bekeken: {{ product.views }}"><i class="fa fa-eye"></i> {{ product.views }}</li>
                     <li data-toggle="tooltip" data-placement="bottom" title="Aangepast op: {{ product.modified }}"><i class="fa fa-clock-o"></i> {{ product.modified }}</li>
                 </ul>
-                <p>{{ product.price|bitcoin }}</p>
+                <p style="font-size: 21px;"><i class="fa fa-btc"></i> {{ product.price|bitcoin }}</p>
                 <p>{{ product.description }}</p>
                 <p><a class="btn btn-success" href="{{ product.url }}" role="button">Bekijk <i class="fa fa-arrow-right"></i></a></p>
             </div>

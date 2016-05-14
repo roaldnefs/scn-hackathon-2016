@@ -153,7 +153,8 @@ def my_products(request):
         form = ProductForm()
     companies = Company.objects.filter(owner=user)
     products = Product.objects.filter(company__in=companies)
-    return render(request, 'my_products.html', {'products': products, 'form': form})
+    exchange_rate = get_rate_of_exchange()
+    return render(request, 'my_products.html', {'products': products, 'form': form, 'exchange_rate': exchange_rate})
 
 
 @login_required(login_url='login')
