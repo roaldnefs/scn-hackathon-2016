@@ -16,6 +16,9 @@
 		{% for company in companies %}
 			<div class="content_box">
 				<h5><a href="{{ company.url }}" target="_blank">{{ company.name }}</a></h5>
+                <ul class="list-inline">
+                <li class="pull-right"><a href="{%url 'my_company' company.id %}" class="btn btn-default btn-xs">Bewerken</a></h2> </li>
+                </ul>
 			</div>
 		{% endfor %}
 		</div>

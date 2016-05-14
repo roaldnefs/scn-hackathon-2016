@@ -168,6 +168,18 @@ def my_product(request, slug=None):
     return render(request, 'my_product.html', {'form': form, 'product': product})
 
 @login_required(login_url='login')
+def my_company(request, id=None):
+    company = get_object_or_404(Company, pk=id)
+    if request.method == 'POST':
+        form = CompanyForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = CompanyForm(instance=company)
+    return render(request, 'my_company.html', {'form': form, 'company': company})
+
+
+@login_required(login_url='login')
 def my_advertisement(request, slug=None):
     product = get_object_or_404(Product, slug=slug)
     advertisement = get_object_or_none(Advertisement, product=product)
