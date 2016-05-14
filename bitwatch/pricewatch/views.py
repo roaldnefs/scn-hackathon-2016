@@ -15,19 +15,19 @@ import requests
 from datetime import datetime, timedelta
 
 
+def get_rate_of_exchange():
+    url = 'http://bitcoinkopen.com/api/daycourses.json'
+    request = requests.get(url)
+    data = json.loads(request.text)[0]
+    return data['EUR']['24h']
+
+
 def get_object_or_none(klass, *args, **kwargs):
     queryset = _get_queryset(klass)
     try:
         return queryset.get(*args, **kwargs)
     except queryset.model.DoesNotExist:
         return None
-
-
-def get_rate_of_exchange():
-    url = 'http://bitcoinkopen.com/api/daycourses.json'
-    request = requests.get(url)
-    data = json.loads(request.text)[0]
-    return data['EUR']['24h']
 
 
 def index(request):

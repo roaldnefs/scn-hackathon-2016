@@ -1,6 +1,7 @@
 {% extends "dashboard_base.html" %}
 {% load staticfiles %}
 {% load bootstrap3 %}
+{% load app_filters %}
 
 {% block title %}Mijn Producten{% endblock %}
 
@@ -20,7 +21,7 @@
                     <h4 class="modal-title">{{ product.name }}</h4>
                   </div>
                   <div class="modal-body">
-                    <p> 
+                    <p>
 
 					Stap naar de 21 bitcoin computer en voor het onderstaande commando in (zonder aanhalingtekens)
 					U ontvangt uw unieke sleutel zodra u op ¨Direct Omhooghalen´ klikt.
@@ -39,7 +40,7 @@
 			<div class="content_box">
 				<h5><a href="{% url 'product' product.slug %}">{{ product.name }}</a></h5>
 				<ul class="list-inline">
-					<li data-toggle="tooltip" data-placement="bottom" class="pull-left"  style="margin-left: 15px" title="{{ product.price }}"><i class="fa fa-btc"></i>  {{ product.price }} </li>
+					<li data-toggle="tooltip" data-placement="bottom" class="pull-left"  style="margin-left: 15px" title="{{ product.price|bitcoin }}"><i class="fa fa-btc"></i>  {{ product.price|bitcoin }} </li>
 					<li data-toggle="tooltip" data-placement="bottom" class="pull-left" style="margin-left: 15px" title="{{ product.category }}"><i class="fa fa-tag"></i>  {{ product.category.name }} </li>
 					<li class="pull-right"><a href="{%url 'my_product' product.slug %}" class="btn btn-default btn-xs">Bewerken</a></h2> </li>
 					<li class="pull-right"><button class="btn btn-default btn-xs" data-toggle="modal" data-target="#product-modal-{{ product.id }}">Omhoogplaatsen</button></li>
