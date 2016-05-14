@@ -247,8 +247,12 @@ $(document).ready (function ()
 		}
 		else
 		{
-			/* Er zijn geen resultaten gevonden. */
-			$('.product_list').append ('<div class="col-xs-12 content_box product clearfix" style="color: gray; font-style: italic; text-align: center; padding-top: 40px;">Er zijn geen resultaten gevonden.</div>');
+			/* Bestaat de 'geen producten' melding al? */
+			if ($('.no-products').length == 0)
+			{
+				/* Er zijn geen resultaten gevonden. */
+				$('.product_list').append ('<div class="col-xs-12 content_box product clearfix no-products" style="color: gray; font-style: italic; text-align: center; padding-top: 40px;">Er zijn geen resultaten gevonden.</div>');
+			}
 		}
 	}
 
