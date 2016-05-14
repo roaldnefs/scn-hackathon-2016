@@ -51,7 +51,8 @@
                 </div>
             </div>
 			<div class="box" style="font-size: 12px; text-align: center; color: gray;">
-				De Bitcoin koersen van <a href="bitcoinkopen.com" target="_blank">bitcoinkopen.com</a> worden gehanteerd bij het omzetten van vulta.
+				<p>De Bitcoin koersen van <a href="bitcoinkopen.com" target="_blank">bitcoinkopen.com</a> worden gehanteerd bij het omzetten van vulta.</p>
+				<p>De huidige koers is:<br /><strong>1 BTC</strong> = <strong>{{ exchange_rate }} EUR</strong></p>
 			</div>
         </div>
 
@@ -62,7 +63,15 @@
 </div>
 
 <script type="text/javascript">
+
+	/* De huidige koers. */
+    var exchage_bitcoin = '{{ exchange_rate }}';
+	
+	/* JSON string met alle producten. */
 	var product_json = '{{ products_json }}';
+	
+	/* JSON string met alle speciale producten. */
     var advertisements_json = '{{ advertisements_json }}';
+	
 </script>
 {% endblock %}

@@ -37,7 +37,7 @@ class Company(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=17, decimal_places=8)
+    price = models.IntegerField()
     slug = models.SlugField(max_length=255, unique=True, editable=False)
     url = models.URLField()
     image = models.URLField(blank=True)

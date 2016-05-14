@@ -7,10 +7,12 @@ from django.db.models import F
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-import json
-from datetime import datetime, timedelta
 from django.utils import timezone
 from django.shortcuts import _get_queryset
+
+import json
+import requests
+from datetime import datetime, timedelta
 
 
 def get_object_or_none(klass, *args, **kwargs):
@@ -21,11 +23,19 @@ def get_object_or_none(klass, *args, **kwargs):
         return None
 
 
+def get_rate_of_exchange():
+    url = 'http://bitcoinkopen.com/api/daycourses.json'
+    request = requests.get(url)
+    data = json.loads(request.text)[0]
+    return data['EUR']['24h']
+
+
 def index(request):
     return render(request, 'index.html', {})
 
 
 def pricewatch(request):
+    exchange_rate = get_rate_of_exchange()
     products_json = serializers.serialize('json', Product.objects.all())
     companies = Company.objects.all()
     categories = Category.objects.all()
@@ -35,7 +45,7 @@ def pricewatch(request):
     return render(
         request,
         'pricewatch.html',
-        {'products_json': SafeString(products_json), 'advertisements_json': SafeString(advertisements_json), 'companies': companies, 'categories': categories})
+        {'products_json': SafeString(products_json), 'advertisements_json': SafeString(advertisements_json), 'companies': companies, 'categories': categories, 'exchange_rate': exchange_rate})
 
 
 def companies(request):
@@ -82,6 +92,7 @@ def register(request):
             user = form.save()
             user.set_password(user.password)
             user.save()
+            return HttpResponseRedirect('login')
     else:
         form = UserForm()
     return render(request, 'register.html', {'form': form})
