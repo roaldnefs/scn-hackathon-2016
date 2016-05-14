@@ -30,6 +30,12 @@ class Company(models.Model):
         verbose_name = 'bedrijf'
         verbose_name_plural = 'bedrijven'
 
+    def save(self, *args, **kwargs):
+        super(Company, self).save(*args, **kwargs)
+        if not self.id:
+            self.id = slugify(self.name + ' ' + str(self.id))
+            self.save()
+
     def __unicode__(self):
         return u'%s (%d)' % (self.name, self.kvk)
 
