@@ -89,3 +89,11 @@ class Advertisement(models.Model):
 
     def __unicode__(self):
         return u'%s' % (self.product.name)
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User)
+    phonenumber = models.CharField(max_length=13)
+
+    def __unicode__(self):
+        return u'%s %s' % (self.user.username, self.phonenumber)

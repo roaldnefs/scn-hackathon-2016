@@ -30,6 +30,10 @@ class AdvertisementAdmin(admin.ModelAdmin):
         model = models.Advertisement
         exclude = []
 
+class ProfileAdmin(admin.ModelAdmin):
+    class Meta:
+        model = models.Profile
+
 
 admin.site.register(models.Company, CompanyAdmin)
 admin.site.register(models.Product, ProductAdmin)

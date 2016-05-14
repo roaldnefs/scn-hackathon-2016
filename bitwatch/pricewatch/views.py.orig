@@ -184,10 +184,7 @@ def my_company(request, id=None):
     if request.method == 'POST':
         form = CompanyForm(request.POST)
         if form.is_valid():
-            updated_company = form.save(commit=False)
-            updated_company.id = company.id
-            updated_company.owner = company.owner
-            updated_company.save()
+            form.save()
     else:
         form = CompanyForm(instance=company)
     return render(request, 'my_company.html', {'form': form, 'company': company})
