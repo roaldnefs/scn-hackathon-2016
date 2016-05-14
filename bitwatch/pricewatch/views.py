@@ -89,7 +89,9 @@ def register(request):
 
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'dashboard.html', {})
+    part = Product.objects.all().order_by('views').reverse()[:5]
+    products = Product.objects.all()
+    return render(request, 'dashboard.html', {'part':part, 'product':product})
 
 
 @login_required(login_url='login')
