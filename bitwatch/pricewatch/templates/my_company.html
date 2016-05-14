@@ -8,11 +8,14 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">{{ company.name }} - Bewerken</div>
+
     <div class="panel-body">
         <form method="post">
             {% csrf_token %}
             {% bootstrap_form form %}
                 <button type="submit" class="btn btn-default">Bewerken</button>
+
+
         </form>
     </div>
 </div>
