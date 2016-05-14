@@ -1,10 +1,21 @@
 {% extends "dashboard_base.html" %}
 {% load staticfiles %}
+{% load bootstrap3 %}
 
 {% block title %}Dashboard{% endblock %}
 
 {% block dashboard %}
 
 <h2>Dashboard</h2>
+	<div  class="panel panel-default">
+		<h5> Top 5 bezichtigingen </h5>
+		{% for part in part %}
 
+		<div>{{part.name}}
+		{{part.views}}</div>
+		 {% endfor %}
+
+	</div>  
+ 
 {% endblock %}
+
