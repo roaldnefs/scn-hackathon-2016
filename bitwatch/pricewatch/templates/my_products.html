@@ -40,7 +40,7 @@
 			<div class="content_box">
 				<h5><a href="{% url 'product' product.slug %}">{{ product.name }}</a></h5>
 				<ul class="list-inline">
-					<li data-toggle="tooltip" data-placement="bottom" class="pull-left"  style="margin-left: 15px" title="{{ product.price|bitcoin }}"><i class="fa fa-btc"></i>  {{ product.price|bitcoin }} </li>
+					<li data-toggle="tooltip" data-placement="bottom" class="pull-left"  style="margin-left: 15px" title="{{ product.price|bitcoin:exchange_rate }}"><i class="fa fa-btc"></i>  {{ product.price|bitcoin:exchange_rate }} </li>
 					<li data-toggle="tooltip" data-placement="bottom" class="pull-left" style="margin-left: 15px" title="{{ product.category }}"><i class="fa fa-tag"></i>  {{ product.category.name }} </li>
 					<li class="pull-right"><a href="{%url 'my_product' product.slug %}" class="btn btn-default btn-xs">Bewerken</a></h2> </li>
 					<li class="pull-right"><button class="btn btn-default btn-xs" data-toggle="modal" data-target="#product-modal-{{ product.id }}">Omhoogplaatsen</button></li>
