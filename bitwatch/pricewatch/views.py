@@ -13,6 +13,7 @@ from django.shortcuts import _get_queryset
 import json
 import requests
 from datetime import datetime, timedelta
+import urllib
 
 
 def get_rate_of_exchange():
@@ -57,6 +58,14 @@ def product(request, slug=None):
     product = get_object_or_404(Product, slug=slug)
     # Do a transaction to increment the views.
     Product.objects.filter(pk=product.id).update(views=F('views') + 1)
+    if request.method == 'POST':
+        phonenumber = request.POST['phonenumber']
+        message = 'Hi, ' + product.name + ' (' + product.url + ')'
+        url = 'http://***REMOVED***:5000/sms?to=' + urllib.quote_plus(str(phonenumber)) + '&message=' + urllib.quote_plus(str(message))
+        print('URL: ' + url)
+        r = requests.get(url)
+        print(r.status_code)
+
     return render(
         request,
         'product.html',

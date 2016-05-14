@@ -6,6 +6,31 @@
 
 {% block content %}
 
+<div class="modal fade" tabindex="-1" role="dialog" id="sms-modal">
+  <form method="post">
+  {% csrf_token %}
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Verstuur SMS Link</h4>
+      </div>
+      <div class="modal-body">
+        <p>Stuur deze deal ({{ product.name }}) gemakkelijk en snel naar je smartphone met onze (gratis) SMS dienst!</p>
+        <div class="form-group">
+            <label for="phonenumber">Telefoonnummer</label>
+            <input type="phonenumber" class="form-control" id="phonenumber" placeholder="31600000000" name="phonenumber">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Verstuur <i class="fa fa-mobile" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+
 <div class="container main_container">
     <div class="row">
         <div class="col-xs-12 box">
@@ -28,7 +53,9 @@
                 </ul>
                 <p style="font-size: 21px;"><i class="fa fa-btc"></i> {{ product.price|bitcoin }}</p>
                 <p>{{ product.description }}</p>
-                <p><a class="btn btn-success" href="{{ product.url }}" role="button">Bekijk <i class="fa fa-arrow-right"></i></a></p>
+                <p><a class="btn btn-success" href="{{ product.url }}" role="button">Bekijk <i class="fa fa-arrow-right"></i></a>
+                <button class="btn btn-default" data-toggle="modal" data-target="#sms-modal">Verstuur SMS <i class="fa fa-mobile" aria-hidden="true"></i>
+</button></p>
             </div>
         </div>
     </div>
