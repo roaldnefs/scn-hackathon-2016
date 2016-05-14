@@ -162,7 +162,10 @@ def my_product(request, slug=None):
     if request.method == 'POST':
         form = ProductForm(request.POST)
         if form.is_valid():
-            form.save()
+            updated_product = form.save(commit=False)
+            updated_product.id = product.id
+            updated_product.created = product.created
+            updated_product.save()
     else:
         form = ProductForm(instance=product)
     return render(request, 'my_product.html', {'form': form, 'product': product})
