@@ -1,9 +1,8 @@
 # SCN Hackathon 2016
-Bitcoin pricewatch (BitWatch) met de 21 BITCOIN COMPUTER
-
-Ontdek, koop en zoek de beste Bitcoin deals!
+Gedurende 48 uur is er tijdens de SCN Hackathon (editie 2016) een Bitcoin pricewatch (BitWatch) ontwikkeld met de 21 BITCOIN COMPUTER.
 
 ![BitWatch Preview](https://raw.githubusercontent.com/roaldnefs/scn-hackathon-2016/master/other/screenshot.png)
+_Screenshot van de BitWatch pricewatch._
 
 ## Project Beschrijving
 Er gaat gewerkt worden aan een **Bitcoin Pricewatch**, een soort vergelijkingswebsite voor producten die je met Bitcoins kunt kopen. Op deze vergelijkingswebsite kunnen **Nederlandse consumenten** producten vergelijken die door de website beheerder of door **bedrijven** zijn toegevoegd.
