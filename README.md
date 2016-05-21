@@ -3,6 +3,8 @@ Bitcoin pricewatch (BitWatch) met de 21 BITCOIN COMPUTER
 
 Ontdek, koop en zoek de beste Bitcoin deals!
 
+![BitWatch Preview](https://raw.githubusercontent.com/roaldnefs/scn-hackathon-2016/master/other/screenshot.png)
+
 ## Project Beschrijving
 Er gaat gewerkt worden aan een **Bitcoin Pricewatch**, een soort vergelijkingswebsite voor producten die je met Bitcoins kunt kopen. Op deze vergelijkingswebsite kunnen **Nederlandse consumenten** producten vergelijken die door de website beheerder of door **bedrijven** zijn toegevoegd.
 
