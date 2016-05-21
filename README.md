@@ -1,5 +1,5 @@
 # SCN Hackathon 2016
-# Bitcoin pricewatch (BitWatch) met de 21 BITCOIN COMPUTER
+Bitcoin pricewatch (BitWatch) met de 21 BITCOIN COMPUTER
 
 Ontdek, koop en zoek de beste Bitcoin deals!
 
