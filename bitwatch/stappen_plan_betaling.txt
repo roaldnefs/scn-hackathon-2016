@@ -1,9 +1,9 @@
 Stap naar de 21 bitcoin computer en voor het onderstaande commando in (zonder aanhalingtekens)
 
-"21 buy ***REMOVED***:5000/pay?reference=[unieke referentiesleutel]\&days=[aantal dagen] 
+"21 buy 0.0.0.0:5000/pay?reference=[unieke referentiesleutel]\&days=[aantal dagen] 
 
 Hieronder een uitleg van het commando wat u net heeft in getypt. Het getal 21 commando zet de betaling
-in actie. De transactieserver verwacht op dat moment een betaling. Het adres ***REMOVED***:5000
+in actie. De transactieserver verwacht op dat moment een betaling. Het adres 0.0.0.0:5000
 is betalingsportal. Het commando "/pay" vertelt welke acties wij willen verrichting. Dit is in dit geval een betaling. 
 
 de [unieke referentie] vindt u onder aan het scherm. Het is verstandig deze op de schrijven of te 

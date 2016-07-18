@@ -59,12 +59,12 @@ def calc_price (request):
 @payment.required (calc_price)
 def pay ():
 	# Maak een request aan naar de Django server.
-	r = requests.get ('http://***REMOVED***:8000/pay/' + request.args.get ('reference') + '/' + str (to_int (request.args.get ('days'))))
+	r = requests.get ('http://0.0.0.0:8000/pay/' + request.args.get ('reference') + '/' + str (to_int (request.args.get ('days'))))
 
 	# Is de request gelukt?
 	if (r.status_code == 200):
 		# Stuur een SMS naar beheer om te laten zien dat de betaling is gelukt (kost 3000 satoshis).
-		call (['21', 'buy', 'phone/send_sms', '--data', '{"phone":"***REMOVED***","text":"Er is zojuist een betaling van ' + str (to_int (request.args.get ('days')) * 1000) + ' satoshis uitgevoerd."}', '--maxprice', '3000'])
+		call (['21', 'buy', 'phone/send_sms', '--data', '{"phone":"+31600000000","text":"Er is zojuist een betaling van ' + str (to_int (request.args.get ('days')) * 1000) + ' satoshis uitgevoerd."}', '--maxprice', '3000'])
 		
 		# Geef dan 'OK' terug naar de client.
 		return 'OK'
@@ -86,4 +86,4 @@ def sms ():
 
 # Initialize de server.
 if __name__ == '__main__':
-    app.run (host='***REMOVED***')
+    app.run (host='10.13.100.98')

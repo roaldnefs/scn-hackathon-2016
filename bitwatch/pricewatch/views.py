@@ -61,7 +61,7 @@ def product(request, slug=None):
     if request.method == 'POST':
         phonenumber = request.POST['phonenumber']
         message = 'Hi, ' + product.name + ' (' + product.url + ')'
-        url = 'http://***REMOVED***:5000/sms?to=' + urllib.quote_plus(str(phonenumber)) + '&message=' + urllib.quote_plus(str(message))
+        url = 'http://0.0.0.0:5000/sms?to=' + urllib.quote_plus(str(phonenumber)) + '&message=' + urllib.quote_plus(str(message))
         print('URL: ' + url)
         r = requests.get(url)
         print(r.status_code)
